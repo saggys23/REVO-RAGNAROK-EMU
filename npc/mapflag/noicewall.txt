@@ -101,7 +101,7 @@
 //kh_vila	mapflag	noicewall
 //ve_in	mapflag	noicewall
 //ve_in02	mapflag	noicewall
-
+lhz_dun03	mapflag	noicewall
 // Guild Castles ==========
 aldeg_cas01	mapflag	noicewall
 aldeg_cas02	mapflag	noicewall
