@@ -7182,9 +7182,9 @@
 12881,Elf_Tear_Silence,Elf Tear Silence,2,0,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ sc_start2 SC_GVG_SILENCE,10000,3000,0; },{},{}
 12882,Elf_Tear_Blind,Elf Tear Blind,2,0,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ sc_start2 SC_GVG_BLIND,10000,3000,0; },{},{}
 12883,Almighty,Almighty,2,20,,10,,,,,0xFFFFFFFF,63,2,,,,,,{ specialeffect2 EF_BASH3D; sc_start SC_2011RWC_SCROLL,1800000,10; },{},{}
-12884,Infinite_Concentration_Potion,Infinite Concentration Potion,11,10,,0,,,,0,0xFFFFFFFF,63,2,,,,,,{ sc_start SC_ASPDPOTION0,1800000,4; },{},{}
-12885,Infinite_Awakening_Potion,Infinite Awakening Potion,11,10,,0,,,,0,0xFFFFFFFF,63,2,,,,,,{ sc_start SC_ASPDPOTION1,1800000,6; },{},{}
-12886,Infinite_Berserk_Potion,Infinite Berserk Potion,11,10,,0,,,,0,0xFFFFFFFF,63,2,,,,,,{ sc_start SC_ASPDPOTION2,1800000,9; },{},{}
+12884,Infinite_Concentration_Potion,Infinite Concentration Potion,11,10,,0,,,,0,0xFFFFFFFF,63,2,,,,,,{ specialeffect2 218; sc_start SC_ASPDPOTION0,1800000,4; },{},{}
+12885,Infinite_Awakening_Potion,Infinite Awakening Potion,11,10,,0,,,,0,0xFFF7FEEF,63,2,,,40,,,{ specialeffect2 219; sc_start SC_ASPDPOTION1,1800000,6; },{},{}
+12886,Infinite_Berserk_Potion,Infinite Berserk Potion,11,10,,0,,,,0,0x41E646A6,63,2,,,85,,,{ specialeffect2 220; sc_start SC_ASPDPOTION2,1800000,9; },{},{}
 12887,C_Wing_Of_Fly,Infinite Flywing,2,0,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ itemskill "AL_TELEPORT",1; },{},{}
 12888,Siege_Kit_Box,Siege Kit Box,18,0,,100,,,,,0xFFFFFFFF,63,2,,,,,,{},{},{}
 12889,Weapon_Box_Spear,Weapon Box(Spear),2,10,,200,,,,0,0xFFFFFFFF,63,2,,,,,,{},{},{}
