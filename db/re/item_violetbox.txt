@@ -367,20 +367,20 @@ IG_VioletBox,1258,7		// Katar of Raging Blaze
 IG_VioletBox,1259,7		// Katar of Piercing Wind
 IG_VioletBox,1262,1		// Loki's Nail
 IG_VioletBox,1263,1		// Unholy Touch
-IG_VioletBox,1264,2		// Specialty Jur
-IG_VioletBox,1265,1		// Bloody Roar
+//IG_VioletBox,1264,2		// Specialty Jur
+//IG_VioletBox,1265,1		// Bloody Roar
 IG_VioletBox,1269,1		// Inverse Scale
 IG_VioletBox,1271,1		// Blood Tears
 IG_VioletBox,1302,7		// Axe
 IG_VioletBox,1304,7		// Orcish Axe
-IG_VioletBox,1307,1		// Windhawk
+//IG_VioletBox,1307,1		// Windhawk
 IG_VioletBox,1352,7		// Battle Axe
 IG_VioletBox,1355,7		// Hammer
 IG_VioletBox,1358,7		// Buster
 IG_VioletBox,1361,7		// Two-Handed Axe
-IG_VioletBox,1370,1		// Doom Slayer
-IG_VioletBox,1376,1		// Heart Breaker
-IG_VioletBox,1377,1		// Hurricane Fury
+//IG_VioletBox,1370,1		// Doom Slayer
+//IG_VioletBox,1376,1		// Heart Breaker
+//IG_VioletBox,1377,1		// Hurricane Fury
 IG_VioletBox,1402,7		// Javelin
 IG_VioletBox,1405,7		// Spear
 IG_VioletBox,1408,7		// Pike
@@ -392,7 +392,7 @@ IG_VioletBox,1461,7		// Trident
 IG_VioletBox,1464,7		// Halberd
 IG_VioletBox,1472,7		// Soul Staff
 IG_VioletBox,1474,1		// Gae Bolg
-IG_VioletBox,1478,1		// Ahlspiess
+//IG_VioletBox,1478,1		// Ahlspiess
 IG_VioletBox,1502,7		// Club
 IG_VioletBox,1505,7		// Mace
 IG_VioletBox,1508,7		// Smasher
@@ -467,7 +467,7 @@ IG_VioletBox,1818,1		// Magma Fist
 IG_VioletBox,1819,1		// Icicle Fist
 IG_VioletBox,1820,1		// Electric Fist
 IG_VioletBox,1821,1		// Seismic Fist
-IG_VioletBox,1822,1		// Combo Battle Glove
+//IG_VioletBox,1822,1		// Combo Battle Glove
 IG_VioletBox,1902,7		// Violin
 IG_VioletBox,1904,7		// Mandolin
 IG_VioletBox,1906,7		// Lute
@@ -622,7 +622,7 @@ IG_VioletBox,2508,7		// Ragamuffin Manteau
 IG_VioletBox,2510,7		// Somber Novice Hood
 IG_VioletBox,2513,1		// Heavenly Maiden Robe
 IG_VioletBox,2514,1		// Pauldron
-IG_VioletBox,2515,1		// Eagle Wing
+//IG_VioletBox,2515,1		// Eagle Wing
 IG_VioletBox,2601,7		// Ring
 IG_VioletBox,2602,7		// Earring
 IG_VioletBox,2603,7		// Necklace
@@ -651,7 +651,7 @@ IG_VioletBox,2628,7		// Novice Armlet
 IG_VioletBox,2652,1		// Goddess of Fortune's Cursed Brooch
 IG_VioletBox,2654,1		// Shinobi Sash
 IG_VioletBox,2655,1		// Bloodied Shackle Ball
-IG_VioletBox,2656,1		// Armor Charm
+//IG_VioletBox,2656,1		// Armor Charm
 IG_VioletBox,5002,1		// Jewel Crown
 IG_VioletBox,5003,7		// Joker Jester
 IG_VioletBox,5005,7		// Gas Mask
@@ -668,8 +668,8 @@ IG_VioletBox,5035,7		// Poring Hat
 IG_VioletBox,5037,7		// Nutshell
 IG_VioletBox,5053,1		// Sphinx Hat
 IG_VioletBox,5055,7		// Novice False Eggshell
-IG_VioletBox,5066,1		// Succubus Horn
-IG_VioletBox,5072,1		// Incubus Horn
+//IG_VioletBox,5066,1		// Succubus Horn
+//IG_VioletBox,5072,1		// Incubus Horn
 IG_VioletBox,5085,1		// Small Ribbons
 IG_VioletBox,5088,7		// Surprised Mask
 IG_VioletBox,5089,7		// Annoyed Mask

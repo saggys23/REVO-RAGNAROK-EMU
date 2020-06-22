@@ -350,9 +350,9 @@ IG_BlueBox,1126,6	// Saber
 IG_BlueBox,1127,6	// Saber
 IG_BlueBox,1128,6	// Haedonggum
 IG_BlueBox,1129,6	// Flamberge
-IG_BlueBox,1146,1	// Town Sword
-IG_BlueBox,1147,1	// Town Sword
-IG_BlueBox,1148,1	// Star Dust Blade
+//IG_BlueBox,1146,1	// Town Sword
+//IG_BlueBox,1147,1	// Town Sword
+//IG_BlueBox,1148,1	// Star Dust Blade
 IG_BlueBox,1151,3	// Slayer
 IG_BlueBox,1152,3	// Slayer
 IG_BlueBox,1154,3	// Bastard Sword
@@ -379,9 +379,9 @@ IG_BlueBox,1220,3	// Gladius
 IG_BlueBox,1222,3	// Damascus
 IG_BlueBox,1226,3	// Damascus
 IG_BlueBox,1243,3	// Novice Main Gauche
-IG_BlueBox,1245,1	// Cinquedea
-IG_BlueBox,1247,1	// Kindle Dagger
-IG_BlueBox,1248,1	// Obsidian Dagger
+//IG_BlueBox,1245,1	// Cinquedea
+//IG_BlueBox,1247,1	// Kindle Dagger
+//IG_BlueBox,1248,1	// Obsidian Dagger
 IG_BlueBox,1249,1	// Fisherman's Dagger
 IG_BlueBox,1250,3	// Jur
 IG_BlueBox,1251,3	// Jur
@@ -395,14 +395,14 @@ IG_BlueBox,1258,3	// Katar of Raging Blaze
 IG_BlueBox,1259,3	// Katar of Piercing Wind
 IG_BlueBox,1262,1	// Loki's Nail
 IG_BlueBox,1263,1	// Unholy Touch
-IG_BlueBox,1264,2	// Specialty Jur
-IG_BlueBox,1265,1	// Bloody Roar
+//IG_BlueBox,1264,2	// Specialty Jur
+//IG_BlueBox,1265,1	// Bloody Roar
 IG_BlueBox,1269,1	// Inverse Scale
 IG_BlueBox,1271,1	// Blood Tears
 IG_BlueBox,1301,3	// Axe
 IG_BlueBox,1302,3	// Axe
 IG_BlueBox,1304,3	// Orcish Axe
-IG_BlueBox,1307,1	// Windhawk
+//IG_BlueBox,1307,1	// Windhawk
 IG_BlueBox,1351,3	// Battle Axe
 IG_BlueBox,1352,3	// Battle Axe
 IG_BlueBox,1354,3	// Hammer
@@ -412,8 +412,8 @@ IG_BlueBox,1358,3	// Buster
 IG_BlueBox,1360,3	// Two-Handed Axe
 IG_BlueBox,1361,3	// Two-Handed Axe
 IG_BlueBox,1370,1	// Doom Slayer
-IG_BlueBox,1376,1	// Heart Breaker
-IG_BlueBox,1377,1	// Hurricane Fury
+//IG_BlueBox,1376,1	// Heart Breaker
+//IG_BlueBox,1377,1	// Hurricane Fury
 IG_BlueBox,1401,9	// Javelin
 IG_BlueBox,1402,9	// Javelin
 IG_BlueBox,1404,9	// Spear
@@ -434,7 +434,7 @@ IG_BlueBox,1463,3	// Halberd
 IG_BlueBox,1464,3	// Halberd
 IG_BlueBox,1472,3	// Soul Staff
 IG_BlueBox,1474,1	// Gae Bolg
-IG_BlueBox,1478,1	// Ahlspiess
+//IG_BlueBox,1478,1	// Ahlspiess
 IG_BlueBox,1501,6	// Club
 IG_BlueBox,1502,6	// Club
 IG_BlueBox,1504,6	// Mace
@@ -473,10 +473,10 @@ IG_BlueBox,1613,3	// Mighty Staff
 IG_BlueBox,1614,3	// Wand of Occult
 IG_BlueBox,1615,3	// Evil Bone Wand
 IG_BlueBox,1616,1	// Wing Staff
-IG_BlueBox,1617,1	// Survivor's Rod
-IG_BlueBox,1618,1	// Survivor's Rod
-IG_BlueBox,1619,1	// Survivor's Rod
-IG_BlueBox,1620,1	// Survivor's Rod
+//IG_BlueBox,1617,1	// Survivor's Rod
+//IG_BlueBox,1618,1	// Survivor's Rod
+//IG_BlueBox,1619,1	// Survivor's Rod
+//IG_BlueBox,1620,1	// Survivor's Rod
 IG_BlueBox,1621,1	// Hypnotist's Staff
 IG_BlueBox,1622,1	// Hypnotist's Staff
 IG_BlueBox,1701,3	// Bow
@@ -535,7 +535,7 @@ IG_BlueBox,1818,1	// Magma Fist
 IG_BlueBox,1819,1	// Icicle Fist
 IG_BlueBox,1820,1	// Electric Fist
 IG_BlueBox,1821,1	// Seismic Fist
-IG_BlueBox,1822,1	// Combo Battle Glove
+//IG_BlueBox,1822,1	// Combo Battle Glove
 IG_BlueBox,1901,3	// Violin
 IG_BlueBox,1902,3	// Violin
 IG_BlueBox,1903,3	// Mandolin
@@ -550,8 +550,8 @@ IG_BlueBox,1911,3	// Gumoongoh
 IG_BlueBox,1912,3	// Gumoongoh
 IG_BlueBox,1914,1	// Burning Passion Guitar
 IG_BlueBox,1915,1	// Loner's Guitar
-IG_BlueBox,1916,1	// Green Acre Guitar
-IG_BlueBox,1917,1	// Gentle Breeze Guitar
+//IG_BlueBox,1916,1	// Green Acre Guitar
+//IG_BlueBox,1917,1	// Gentle Breeze Guitar
 IG_BlueBox,1918,1	// Oriental Lute
 IG_BlueBox,1919,1	// Base Guitar
 IG_BlueBox,1950,3	// Rope
@@ -707,7 +707,7 @@ IG_BlueBox,2339,3	// Pantie
 IG_BlueBox,2340,3	// Novice Breastplate
 IG_BlueBox,2341,3	// Legion Plate Armor
 IG_BlueBox,2352,3	// Tattered Novice Ninja Suit
-IG_BlueBox,2365,1	// Orleans's Gown
+//IG_BlueBox,2365,1	// Orleans's Gown
 IG_BlueBox,2401,3	// Sandals
 IG_BlueBox,2402,3	// Sandals
 IG_BlueBox,2403,3	// Shoes
@@ -733,7 +733,7 @@ IG_BlueBox,2510,3	// Somber Novice Hood
 IG_BlueBox,2512,1	// Novice Manteau
 IG_BlueBox,2513,1	// Heavenly Maiden Robe
 IG_BlueBox,2514,1	// Pauldron
-IG_BlueBox,2515,1	// Eagle Wing
+//IG_BlueBox,2515,1	// Eagle Wing
 IG_BlueBox,2601,3	// Ring
 IG_BlueBox,2602,3	// Earring
 IG_BlueBox,2603,3	// Necklace
