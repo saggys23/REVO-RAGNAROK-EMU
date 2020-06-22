@@ -13358,8 +13358,10 @@ Body:
         Count: 10
     Element: Weapon
     CastCancel: true
+    Cooldown: 1000
     AfterCastActDelay: 1000
-    
+    CastTime: 1000
+    IgnoreDex: true
     Requires:
       SpCost: 30
       ItemCost:

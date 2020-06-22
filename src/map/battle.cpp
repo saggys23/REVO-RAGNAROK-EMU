@@ -6655,7 +6655,7 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 			{
 				struct Damage atk = battle_calc_weapon_attack(src, target, skill_id, skill_lv, 0);
 				struct Damage matk = battle_calc_magic_attack(src, target, skill_id, skill_lv, 0);
-				md.damage = 7 * ((atk.damage/skill_lv + matk.damage/skill_lv) * tstatus->vit / 100 );
+				md.damage = 6 * ((atk.damage/skill_lv + matk.damage/skill_lv) * tstatus->vit / 100 );
 
 				// AD benefits from endow/element but damage is forced back to neutral
 				md.damage = battle_attr_fix(src, target, md.damage, ELE_NEUTRAL, tstatus->def_ele, tstatus->ele_lv);
