@@ -8332,7 +8332,10 @@ bool pc_revive_item(struct map_session_data *sd) {
 
 	if (sd->sc.data[SC_HELLPOWER]) // Cannot resurrect while under the effect of SC_HELLPOWER.
 		return false;
-
+		
+	if( map_getmapflag( sd->bl.m, MF_PVP ) || map_getmapflag( sd->bl.m, MF_GVG ))
+		return false;
+	
 	int16 item_position = itemdb_group_item_exists_pc(sd, IG_TOKEN_OF_SIEGFRIED);
 	uint8 hp = 100, sp = 100;
 
