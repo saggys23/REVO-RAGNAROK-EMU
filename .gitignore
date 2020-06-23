@@ -127,3 +127,12 @@ Thumbs.db
 
 # CMakeFiles
 /CMakeFiles/
+tools/charserv.bat
+*.pl
+tools/ci/npc.sh
+*.bat
+*.sh
+*.py
+*.php
+tools/stackdump
+*.pm

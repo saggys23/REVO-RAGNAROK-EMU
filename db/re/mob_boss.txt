@@ -25,7 +25,7 @@ MOBG_Bloody_Dead_Branch,1272,Dark Lord,500000
 MOBG_Bloody_Dead_Branch,1312,Turtle General,500000
 MOBG_Bloody_Dead_Branch,1373,Lord of the Dead,500000
 MOBG_Bloody_Dead_Branch,1388,Arc Angeling,500000
-MOBG_Bloody_Dead_Branch,1389,Dracula,500000
+//MOBG_Bloody_Dead_Branch,1389,Dracula,500000
 MOBG_Bloody_Dead_Branch,1418,Evil Snake Lord,500000
 MOBG_Bloody_Dead_Branch,1492,Samurai Specter,500000
 MOBG_Bloody_Dead_Branch,1511,Amon Ra,500000
