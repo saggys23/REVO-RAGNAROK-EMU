@@ -550,7 +550,26 @@ lhz_in02,282,20,7	script	Fulerr	869,{
 	callfunc "refinemain","Fulerr",0;
 	end;
 }
-
+izlude,161,125,3	script	Fulerr#a	869,{
+	callfunc "refinemain","Fulerr1",0;
+	end;
+}
+izlude_d,161,125,3	script	Fulerr#b	869,{
+	callfunc "refinemain","Fulerr",0;
+	end;
+}
+izlude_c,161,125,3	script	Fulerr#c	869,{
+	callfunc "refinemain","Fulerr",0;
+	end;
+}
+izlude_b,161,125,3	script	Fulerr#d	869,{
+	callfunc "refinemain","Fulerr",0;
+	end;
+}
+izlude_a,161,125,3	script	Fulerr#e	869,{
+	callfunc "refinemain","Fulerr",0;
+	end;
+}
 //============================================================
 //= Main Refiner Function
 //============================================================
@@ -873,7 +892,26 @@ lhz_in02,278,24,3	script	Krugg	86,{
 	callfunc "phramain","Krugg";
 	end;
 }
-
+izlude,160,130,3	script	Krugg#a	86,{
+	callfunc "phramain","Krugg";
+	end;
+}
+izlude_a,160,130,3	script	Krugg#b	86,{
+	callfunc "phramain","Krugg";
+	end;
+}
+izlude_b,160,130,3	script	Krugg#c	86,{
+	callfunc "phramain","Krugg";
+	end;
+}
+izlude_c,160,130,3	script	Krugg#d	86,{
+	callfunc "phramain","Krugg";
+	end;
+}
+izlude_d,160,130,3	script	Krugg#e	86,{
+	callfunc "phramain","Krugg";
+	end;
+}
 // Material Salesmen Functions
 //============================================================
 function	script	phramain	{
@@ -959,6 +997,26 @@ function	script	phramain	{
 
 // Ori/Elu Refiners
 //============================================================
+izlude,159,121,12	script	Zanna	83,{
+	callfunc "orimain","Zanna";
+	end;
+}
+izlude_a,159,121,12	script	Zanna#a	83,{
+	callfunc "orimain","Zanna";
+	end;
+}
+izlude_b,159,121,12	script	Zanna#b	83,{
+	callfunc "orimain","Zanna";
+	end;
+}
+izlude_c,159,121,12	script	Zanna#c	83,{
+	callfunc "orimain","Zanna";
+	end;
+}
+izlude_d,159,121,12	script	Zanna#d	83,{
+	callfunc "orimain","Zanna";
+	end;
+}
 prt_in,63,69,3	script	Dietrich	84,{
 	callfunc "orimain","Dietrich";
 	end;
@@ -1064,7 +1122,26 @@ alberta_in,31,65,4	script	Repairman#alb	86,{
 	callfunc "repairmain","Repairman";
 	end;
 }
-
+izlude,122,150,6	script	Repairman#izl	84,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+izlude_a,122,150,6	script	Repairman#izlA	84,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+izlude_b,122,150,6	script	Repairman#izlB	84,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+izlude_c,122,150,6	script	Repairman#izlC	84,{
+	callfunc "repairmain","Repairman";
+	end;
+}
+izlude_d,122,150,6	script	Repairman#izlD	84,{
+	callfunc "repairmain","Repairman";
+	end;
+}
 moc_ruins,107,94,4	script	Repairman#moc	99,{
 	callfunc "repairmain","Repairman";
 	end;

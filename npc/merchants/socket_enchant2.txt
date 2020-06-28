@@ -474,3 +474,8 @@ function	script	Func_Socket2	{
 			close;
 	}
 }
+
+
+
+izlude,155,135,3	duplicate(SocketEnchant2)	Leablem#izl	86
+
