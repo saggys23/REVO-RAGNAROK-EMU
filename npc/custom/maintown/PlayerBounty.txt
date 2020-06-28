@@ -1,0 +1,815 @@
+//===== rAthena Script =======================================
+//= Player Bounty System
+//===== By: ==================================================
+//= ome-ome / PottScilgrim for BlitzRO.org
+//===== Details: =============================================
+//	Status:
+//	1 = Live
+//	2 = Expired
+// 	3 = Completed
+//	4 = Claimed
+//============================================================
+// Create this SQL DB for the script to work ==
+//============================================================
+/*
+
+CREATE TABLE `player_bounties` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `acc_id` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `item_amt` int(11) DEFAULT NULL,
+  `rew_zeny` int(11) DEFAULT NULL,
+  `rew_item_id` int(11) DEFAULT NULL,
+  `rew_item_amt` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `time_created` int(20) DEFAULT NULL,
+  `comp_by` varchar(100) DEFAULT NULL,
+  `comp_date` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`,`status`) USING BTREE,
+  KEY `player_bounties_status_IDX` (`status`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+
+*/
+izlude,109,136,3	script	Player Bounties#PB1	10243,8,8,{
+
+cutin "zonda_do01",2;
+
+deletearray .@id[0],127;
+deletearray .@transid[0],127;
+deletearray .@accid[0],127;
+deletearray .@name$[0],127;
+deletearray .@itemid[0],127;
+deletearray .@itemamt[0],127;
+deletearray .@rewzeny[0],127;
+deletearray .@rewitemid[0],127;
+deletearray .@rewitemamt[0],127;
+deletearray .@status[0],127;
+deletearray .@timecreated[0],127;
+deletearray .@menulist$[0],127;
+
+query_sql("SELECT `acc_id`,`status` FROM `player_bounties` WHERE acc_id="+getcharid(3)+"", .@inaccid,.@instatus);
+	for(.@i = 0; .@i < getarraysize(.@instatus); .@i++){
+			if(.@instatus[.@i] == 2 || .@instatus[.@i] == 3){ .@notif = .@notif+1; }
+	}
+	if(!.@notif){.@mybounties$ = " ~ My Bounties";} else {.@mybounties$ = " ~ My Bounties [^3fa65f"+.@notif+"^000000]";}
+
+	.name$ = "[^FF0000 Player Bounties ^000000]";
+	if(!getgmlevel()){
+		mes .name$;
+		mes "Looking for a specific item? You can place bounties here for other adventurers to complete!";
+		if(.@notif){mes "You have ^FF0000"+.@notif+"^000000 unclaimed bounties.";}
+		mes "Listing cost: ^FF000025,000^000000z";
+		mes "Listing Length: ^FF00007 days^000000";
+		menu	" ~ View Bounties",PB_VB,
+				" ~ Place Bounty",PB_PB,
+				.@mybounties$,PB_MB,
+				" ~ [^FF0000Cancel^000000]",-;
+					close2; cutin "",255; end;
+	} else {
+		mes .name$;
+		mes "Hi GM "+strcharinfo(0);
+		mes "Listing cost: ^FF000025,000^000000z";
+		mes "Listing Length: ^FF00007 days^000000";
+		
+		
+		
+		if(.@notif){mes "You have ^FF0000"+.@notif+"^000000 unclaimed bounties.";}
+		menu	" ~ ^FF0000GM Menu^000000",PB_GM,
+				" ~ View Bounties",PB_VB,
+				" ~ Place Bounty",PB_PB,
+				.@mybounties$,PB_MB,
+				" ~ [^FF0000Cancel^000000]",-;
+					close2; cutin "",255; end;
+	}
+PB_GM:
+	menu	"~ Reload Listings",PB_GMRL,
+			" ~ [^FF0000Cancel^000000]",-;
+					close2; cutin "",255; end;
+					
+//============================================
+//	Manual refresh to "expire" listings 
+//	over 7 days old
+//============================================
+PB_GMRL:
+	.@sevendaysago = gettimetick(2)-604800;
+	query_sql("SELECT `id`,`time_created`, `status` FROM `player_bounties`", .@id, .@timecreated,.@status);
+	for(.@i = 0; .@i < getarraysize(.@timecreated); .@i++){
+		if(.@timecreated[.@i] <= .@sevendaysago && .@status == 1){
+			query_sql("UPDATE `player_bounties` SET `status` = 2 WHERE id = " + .@id[.@i] + "");
+		}
+	}
+	close2; cutin "",255; end;
+
+//============================================
+//	Viewing live bounties
+//============================================
+PB_VB:
+	clear;
+	mes .name$;
+	mes "Please select how you'd like to view bounties.";
+	menu	" ~ View all by requirement",PB_VBAREQ,
+			" ~ View all by reward item",PB_VBAREW,
+			" ~ View all by reward zeny",PB_VBAREWZ,
+			" ~ [^FF0000Cancel^000000]",-;
+				close2; cutin "",255; end;
+				
+//============================================
+//	View by required item
+//	Ascending ITEM ID
+//	Descending Amount
+//============================================
+PB_VBAREQ:
+	clear;
+	mes .name$;
+	
+	deletearray .@id[0],127;
+	deletearray .@transid[0],127;
+	deletearray .@accid[0],127;
+	deletearray .@name$[0],127;
+	deletearray .@itemid[0],127;
+	deletearray .@itemamt[0],127;
+	deletearray .@rewzeny[0],127;
+	deletearray .@rewitemid[0],127;
+	deletearray .@rewitemamt[0],127;
+	deletearray .@status[0],127;
+	deletearray .@timecreated[0],127;
+	deletearray .@menulist$[0],127;
+
+	for(.@i = 0; .@i < getarraysize(.@status); .@i++){
+		mes "[^cf0404"+.@name$[.@i]+"^000000]-[^2d04cf"+getitemname(.@itemid[.@i])+"^000000] x"+.@itemamt[.@i]+" - "+.@status[.@i];
+	}
+	query_sql("SELECT `id`,`acc_id`,`name`,`item_id`,`item_amt`,`rew_zeny`,`rew_item_id`,`rew_item_amt`,`status` FROM `player_bounties` WHERE `status` = 1 ", .@transid,.@accid,.@name$,.@itemid,.@itemamt,.@rewzeny,.@rewitemid,.@rewitemamt,.@status);
+	
+	if(!getarraysize(.@status)){ mes "There are no bounties live at the moment, why don't you place one?"; close2; cutin "",255; end; }
+	
+	mes "Now listing open bounties by:";
+	mes "[^cf0404seller^000000]-[^2d04cfrequired item^000000] x Amount";
+	mes " ";
+	mes "Total open bounties: "+getarraysize(.@status);
+	
+	
+	
+	for(.@i = 0; .@i < getarraysize(.@status); .@i++){
+			setarray .@menulist$[.@i],"[^cf0404"+.@name$[.@i]+"^000000]-[^2d04cf"+getitemname(.@itemid[.@i])+"^000000] x"+.@itemamt[.@i];
+	}
+
+	set .@c,callfunc("F_Pages",implode(.@menulist$,":"),10);
+	clear;
+	mes .name$;
+	mes "[^cf0404Seller^000000]: "+.@name$[.@c];
+	
+	if(!countitem(.@itemid[.@c])) { mes "[^cf0404Item Needed^000000]: ^FF0000"+getitemname(.@itemid[.@c])+"^000000 x^FF0000"+.@itemamt[.@c]+"^000000"; } 
+		else {
+			if(countitem(.@itemid[.@c]) < .@itemamt[.@c]){ mes "[^cf0404Item Needed^000000]: ^00a81c"+getitemname(.@itemid[.@c])+"^000000 x^FF0000"+.@itemamt[.@c]+"^000000"; } 
+				else { mes "[^cf0404Item Needed^000000]: ^00a81c"+getitemname(.@itemid[.@c])+"^000000 x^00a81c"+.@itemamt[.@c]+"^000000"; }}
+	mes "----";
+	mes "[^e8ae00Reward Item^000000]: "+getitemname(.@rewitemid[.@c])+" x"+.@rewitemamt[.@c];
+	mes "[^e8ae00Zeny Reward^000000]: "+callfunc("F_InsertComma",.@rewzeny[.@c])+"z";
+	//mes .@accid[.@c];
+	if(countitem(.@itemid[.@c]) >= .@itemamt[.@c]){
+		switch(select("[^777777Go Back^000000]:[^3fcc57Turn-in quest^000000]:[^bd6060Cancel^000000]")){
+			case 1:
+				goto PB_VBAREQ;
+			case 2:
+				if(countitem(.@itemid[.@c]) < .@itemamt[.@c]){ 
+					callfunc("F_DISPBOTTOM","Player Bounties","ERROR-Item not found in inventory","RED"); close2; cutin "",255; end; }
+						else {
+							clear;
+							mes .name$;
+							mes "Thank you for your business, see you soon!";
+							delitem .@itemid[.@c],.@itemamt[.@c];
+							getitem .@rewitemid[.@c],.@rewitemamt[.@c];
+							Zeny = Zeny+.@rewzeny[.@c];
+							query_sql("UPDATE `player_bounties` SET `status`=3, `comp_by`='"+strcharinfo(0)+"', `comp_date`="+gettime(DT_YYYYMMDD)+" WHERE id="+.@transid[.@c]+"");
+							close2; cutin "",255; end;
+						}
+			case 3:
+				close2; cutin "",255; end;
+		}
+	} else { next; goto PB_VBAREQ; }
+	close2; cutin "",255; end;
+	
+//============================================
+//	View by reward
+//	Ascending ITEM ID
+//	Descending Amount
+//============================================	
+PB_VBAREW:
+	clear;
+	mes .name$;
+
+	deletearray .@id[0],127;
+	deletearray .@transid[0],127;
+	deletearray .@accid[0],127;
+	deletearray .@name$[0],127;
+	deletearray .@itemid[0],127;
+	deletearray .@itemamt[0],127;
+	deletearray .@rewzeny[0],127;
+	deletearray .@rewitemid[0],127;
+	deletearray .@rewitemamt[0],127;
+	deletearray .@status[0],127;
+	deletearray .@timecreated[0],127;
+	deletearray .@menulist$[0],127;
+	
+	query_sql("SELECT `id`,`acc_id`,`name`,`item_id`,`item_amt`,`rew_zeny`,`rew_item_id`,`rew_item_amt`,`status`,`time_created` FROM `player_bounties` WHERE status=1 ORDER BY id DESC", .@transid,.@accid,.@name$,.@itemid,.@itemamt,.@rewzeny,.@rewitemid,.@rewitemamt,.@status,.@timecreated);
+	
+	if(!getarraysize(.@status)){ mes "There are no bounties live at the moment, why don't you place one?"; close2; cutin "",255; end; }
+		
+	mes "Now listing open bounties by:";
+	mes "[^cf0404seller^000000]-[^02bd63reward item^000000] x Amount";
+	mes " ";
+	mes "Total open bounties: "+getarraysize(.@itemid);
+	for(.@i = 0; .@i < getarraysize(.@itemid); .@i++){
+				setarray .@menulist$[.@i],"[^cf0404"+.@name$[.@i]+"^000000]-[^02bd63"+getitemname(.@rewitemid[.@i])+"^000000] x"+.@rewitemamt[.@i];
+	}
+	
+	set .@c,callfunc("F_Pages",implode(.@menulist$,":"),10);
+	clear;
+	mes .name$;
+	mes "[^cf0404Seller^000000]: "+.@name$[.@c];
+	
+	if(!countitem(.@itemid[.@c])) { mes "[^cf0404Item Needed^000000]: ^FF0000"+getitemname(.@itemid[.@c])+"^000000 x^FF0000"+.@itemamt[.@c]+"^000000"; } 
+		else {
+			if(countitem(.@itemid[.@c]) < .@itemamt[.@c]){ mes "[^cf0404Item Needed^000000]: ^00a81c"+getitemname(.@itemid[.@c])+"^000000 x^FF0000"+.@itemamt[.@c]+"^000000"; } 
+				else { mes "[^cf0404Item Needed^000000]: ^00a81c"+getitemname(.@itemid[.@c])+"^000000 x^00a81c"+.@itemamt[.@c]+"^000000"; }}
+	mes "----";
+	mes "[^e8ae00Reward Item^000000]: "+getitemname(.@rewitemid[.@c])+" x"+.@rewitemamt[.@c];
+	mes "[^e8ae00Zeny Reward^000000]: "+callfunc("F_InsertComma",.@rewzeny[.@c])+"z";
+	if(countitem(.@itemid[.@c]) >= .@itemamt[.@c]){
+		switch(select("[^777777Go Back^000000]:[^3fcc57Turn-in quest^000000]:[^bd6060Cancel^000000]")){
+			case 1:
+				goto PB_VBAREW;
+			case 2:
+				if(countitem(.@itemid[.@c]) < .@itemamt[.@c]){ 
+					callfunc("F_DISPBOTTOM","Player Bounties","ERROR-Item not found in inventory","RED"); close2; cutin "",255; end; }
+						else {
+							clear;
+							mes .name$;
+							mes "Thank you for your business, see you soon!";
+							delitem .@itemid[.@c],.@itemamt[.@c];
+							getitem .@rewitemid[.@c],.@rewitemamt[.@c];
+							Zeny = Zeny+.@rewzeny[.@c];
+							query_sql("UPDATE `player_bounties` SET `status`=3, `comp_by`='"+strcharinfo(0)+"', `comp_date`="+gettime(DT_YYYYMMDD)+" WHERE id="+.@transid[.@c]+"");
+							close2; cutin "",255; end;
+						}
+			case 3:
+				close2; cutin "",255; end;
+		}
+	} else { next; goto PB_VBAREW; }
+	close2; cutin "",255; end;
+
+//============================================
+//	View by Zeny
+//	Descending order
+//============================================
+PB_VBAREWZ:
+	clear;
+	mes .name$;
+
+	deletearray .@id[0],127;
+	deletearray .@transid[0],127;
+	deletearray .@accid[0],127;
+	deletearray .@name$[0],127;
+	deletearray .@itemid[0],127;
+	deletearray .@itemamt[0],127;
+	deletearray .@rewzeny[0],127;
+	deletearray .@rewitemid[0],127;
+	deletearray .@rewitemamt[0],127;
+	deletearray .@status[0],127;
+	deletearray .@timecreated[0],127;
+	deletearray .@menulist$[0],127;
+	
+	query_sql("SELECT `id`,`acc_id`,`name`,`item_id`,`item_amt`,`rew_zeny`,`rew_item_id`,`rew_item_amt`,`status`,`time_created` FROM `player_bounties` WHERE status=1 ORDER BY rew_zeny DESC", .@transid,.@accid,.@name$,.@itemid,.@itemamt,.@rewzeny,.@rewitemid,.@rewitemamt,.@status,.@timecreated);
+	
+	if(!getarraysize(.@status)){ mes "There are no bounties live at the moment, why don't you place one?"; close2; cutin "",255; end; }
+	
+	mes "Now listing open bounties by:";
+	mes "[^cf0404seller^000000]-[^e8ae00Zeny Amount^000000 z]";
+	mes " ";
+	mes "Total open bounties: "+getarraysize(.@itemid);
+	for(.@i = 0; .@i < getarraysize(.@itemid); .@i++){
+				setarray .@menulist$[.@i],"[^cf0404"+.@name$[.@i]+"^000000]-[^e8ae00"+callfunc("F_InsertComma",.@rewzeny[.@i])+"^000000z]";
+	}
+	
+	set .@c,callfunc("F_Pages",implode(.@menulist$,":"),10);
+	clear;
+	mes .name$;
+	mes "[^cf0404Seller^000000]: "+.@name$[.@c];
+	
+	if(!countitem(.@itemid[.@c])) { mes "[^cf0404Item Needed^000000]: ^FF0000"+getitemname(.@itemid[.@c])+"^000000 x^FF0000"+.@itemamt[.@c]+"^000000"; } 
+		else {
+			if(countitem(.@itemid[.@c]) < .@itemamt[.@c]){ mes "[^cf0404Item Needed^000000]: ^00a81c"+getitemname(.@itemid[.@c])+"^000000 x^FF0000"+.@itemamt[.@c]+"^000000"; } 
+				else { mes "[^cf0404Item Needed^000000]: ^00a81c"+getitemname(.@itemid[.@c])+"^000000 x^00a81c"+.@itemamt[.@c]+"^000000"; }}
+	mes "----";
+	mes "[^e8ae00Reward Item^000000]: "+getitemname(.@rewitemid[.@c])+" x"+.@rewitemamt[.@c];
+	mes "[^e8ae00Zeny Reward^000000]: "+callfunc("F_InsertComma",.@rewzeny[.@c])+"z";
+	if(countitem(.@itemid[.@c]) >= .@itemamt[.@c]){
+		switch(select("[^777777Go Back^000000]:[^3fcc57Turn-in quest^000000]:[^bd6060Cancel^000000]")){
+			case 1:
+				goto PB_VBAREWZ;
+			case 2:
+				if(countitem(.@itemid[.@c]) < .@itemamt[.@c]){ 
+					callfunc("F_DISPBOTTOM","Player Bounties","ERROR-Item not found in inventory","RED"); close2; cutin "",255; end; }
+						else {
+							clear;
+							mes .name$;
+							mes "Thank you for your business, see you soon!";
+							delitem .@itemid[.@c],.@itemamt[.@c];
+							getitem .@rewitemid[.@c],.@rewitemamt[.@c];
+							Zeny = Zeny+.@rewzeny[.@c];
+							query_sql("UPDATE `player_bounties` SET `status`=3, `comp_by`='"+strcharinfo(0)+"', `comp_date`="+gettime(DT_YYYYMMDD)+" WHERE id="+.@transid[.@c]+"");
+							close2; cutin "",255; end;
+						}
+			case 3:
+				close2; cutin "",255; end;
+		}
+	} else { next; goto PB_VBAREWZ; }
+	close2; cutin "",255; end;
+	
+//============================================
+//	Placing a bounty
+//============================================
+PB_PB:
+	deletearray .@id[0],127;
+	deletearray .@transid[0],127;
+	deletearray .@accid[0],127;
+	deletearray .@name$[0],127;
+	deletearray .@itemid[0],127;
+	deletearray .@itemamt[0],127;
+	deletearray .@rewzeny[0],127;
+	deletearray .@rewitemid[0],127;
+	deletearray .@rewitemamt[0],127;
+	deletearray .@status[0],127;
+	deletearray .@timecreated[0],127;
+	deletearray .@menulist$[0],127;
+	
+	query_sql("SELECT `acc_id`,`name`,`status` FROM `player_bounties` WHERE acc_id="+ getcharid(3)+" AND status=1 ORDER BY name DESC", .@acc_id,.@name$,.@status);
+	if(getarraysize(.@acc_id) >= 5){
+		clear;
+		mes .name$;
+		mes "Sorry "+strcharinfo(0)+", your account is at the maximum of ^FF00005^000000 live bounties listed.";
+		mes "Please cancel an existing bounty, or wait till one is completed / expires.";
+		close2; cutin "",255; end;
+	}
+	clear;
+PB_PBM:
+	mes .name$;
+	mes "You'd like to place a bounty? That's awesome! We'll just need a few details from you. Please go through the options below and continue once complete, or select 'more information' for a bit more advice.";
+	
+	switch(select("^FF00001^000000) Quest Item - ^32a852"+getitemname(.@itemrequired)+"^000000:^FF00002^000000) Quest Item Amount - ^32a852"+.@itemrequiredamt+"^000000:^FF00003^000000) Reward Item - ^32a852"+getitemname(.@rewarditem)+"^000000:^FF00004^000000) Reward Item Amount - ^32a852"+.@rewarditemamt+"^000000:^FF00005^000000) Reward Zeny Amount - ^32a852"+.@rewardzeny+"^000000:[^32a852CONTINUE^000000]:[^777777More Information^000000]:[^FF0000Cancel^000000]")){
+		
+		//Required ITEM ID
+		case 1:
+			while(1){
+				clear;
+				mes .name$;
+				mes "Input the ITEM ID of the item you'd like to set as your bounty:";
+				input .@tempinp;
+					if(getitemname(.@tempinp) == "null"){
+						clear;
+						mes .name$;
+						mes "That item doesn't exist.";
+						next;
+						goto PB_PBM;
+					}
+				clear;
+				mes .name$;
+				mes "You've selected:";
+				mes "Item ID: ^32a852"+.@tempinp+"^000000";
+				mes "Name: ^32a852"+getitemname(.@tempinp)+"^000000";
+				mes "Is this correct?";
+				switch(select("Yes:No")){
+					case 1:
+						.@itemrequired = .@tempinp;
+						goto PB_PB;
+					case 2:
+						break;
+				}
+			}
+			
+		//Required ITEM amount	
+		case 2:
+			if(!.@itemrequired){
+				clear;
+				mes .name$;
+				mes "Please set the required ITEM ID first.";
+				next;
+				goto PB_PBM;
+			}
+			while(1){
+				clear;
+				mes .name$;
+				mes "Input the AMOUNT of ^32a852"+getitemname(.@itemrequired)+"^000000 you'd like to set as your bounty:";
+				input .@tempinp;
+					if(.@tempinp == 0){
+						clear;
+						mes .name$;
+						mes "You can't set your bounty requirement to '0'";
+						next;
+						goto PB_PBM;
+					}
+				clear;
+				mes .name$;
+				mes "You've selected:";
+				mes "Required amount: ^32a852"+.@tempinp+"^000000";
+				mes "Is this correct?";
+				switch(select("Yes:No")){
+					case 1:
+						.@itemrequiredamt = .@tempinp;
+						goto PB_PB;
+					case 2:
+						break;
+				}
+			}
+			
+		//Reward ITEM ID	
+		case 3:
+			while(1){
+				clear;
+				mes .name$;
+				mes "Input the ITEM ID of the item you'd like to set as your reward:";
+				mes "^FF0000DO NOT USE AN ITEM WITH ENCHANTS/REFINE/CARDS. THESE WILL BE LOST.^000000";
+				input .@tempinp;
+					if(getitemname(.@tempinp) == "null"){
+						clear;
+						mes .name$;
+						mes "That item doesn't exist.";
+						next;
+						goto PB_PBM;
+					}
+					if(!countitem(.@tempinp)){
+						clear;
+						mes .name$;
+						mes "Item ID: ^32a852"+.@tempinp+"^000000";
+						mes "Name: ^32a852"+getitemname(.@tempinp)+"^000000";
+						mes "^FF0000Error^000000: You don't have any of this item in your inventory.";
+						next;
+						goto PB_PBM;
+					}
+				clear;
+				mes .name$;
+				mes "You've selected:";
+				mes "Item ID: ^32a852"+.@tempinp+"^000000";
+				mes "Name: ^32a852"+getitemname(.@tempinp)+"^000000";
+				mes "Is this correct?";
+				switch(select("Yes:No")){
+					case 1:
+						.@rewarditem = .@tempinp;
+						goto PB_PB;
+					case 2:
+						break;
+				}
+			}
+			
+		//Reward ITEM amount	
+		case 4:
+			if(!.@rewarditem){
+				clear;
+				mes .name$;
+				mes "Please set the reward ITEM ID first.";
+				next;
+				goto PB_PBM;
+			}
+			while(1){
+				clear;
+				mes .name$;
+				mes "Input the AMOUNT of ^32a852"+getitemname(.@rewarditem)+"^000000 you'd like to set as your reward:";
+				input .@tempinp;
+					if(.@tempinp == 0){
+						clear;
+						mes .name$;
+						mes "You can't set your reward amount to '0'";
+						next;
+						goto PB_PBM;
+					}
+					if(countitem(.@rewarditem) < .@tempinp){
+						clear;
+						mes .name$;
+						mes "^FF0000Error^000000: You don't have that many in your inventory!";
+						next;
+						goto PB_PBM;
+					}
+				clear;
+				mes .name$;
+				mes "You've selected:";
+				mes "Required amount: ^32a852"+.@tempinp+"^000000";
+				mes "Is this correct?";
+				switch(select("Yes:No")){
+					case 1:
+						.@rewarditemamt = .@tempinp;
+						goto PB_PB;
+					case 2:
+						break;
+				}
+			}
+		//Reward ZENY amount
+		case 5:
+			while(1){
+				clear;
+				mes .name$;
+				mes "Input the amount of the zeny you'd like to set as your reward:";
+				input .@tempinp;
+					if(.@tempinp == 0){
+						clear;
+						mes .name$;
+						mes "You can't set your zeny reward amount to '0'";
+						next;
+						goto PB_PBM;
+					}
+					if(Zeny < .@tempinp){
+						clear;
+						mes .name$;
+						mes "^FF0000Error^000000: You don't have that much zeny to offer!";
+						next;
+						goto PB_PBM;
+					}
+				clear;
+				mes .name$;
+				mes "You've selected:";
+				mes "Zeny Reward: ^32a852"+callfunc("F_InsertComma",.@tempinp)+"^000000";
+				mes "Is this correct?";
+				switch(select("Yes:No")){
+					case 1:
+						.@rewardzeny = .@tempinp;
+						goto PB_PB;
+					case 2:
+						break;
+				}
+			}
+			
+		//CONTINUE
+		case 6:
+			if(!.@rewardzeny || !.@rewarditem || !.@rewarditemamt || !.@itemrequiredamt || !.@itemrequired){
+				clear;
+				mes .name$;
+				mes "I'm sorry, you're missing some details.";
+				mes "Please make sure you've filled out each option";
+				next;
+				goto PB_PBM;
+			} else {
+				clear;
+				mes .name$;
+				mes "Please confirm the details are correct:";
+				mes "Required Item: ^32a852"+getitemname(.@itemrequired)+"^000000";
+				mes "Required Amount: ^32a852"+.@itemrequiredamt+"^000000";
+				mes "Reward Item: ^32a852"+getitemname(.@rewarditem)+"^000000";
+				mes "Reward Amount: ^32a852"+.@rewarditemamt+"^000000";
+				mes "Reward Zeny: ^32a852"+callfunc("F_InsertComma",.@rewardzeny)+"^000000";
+				switch(select("^32a852That's correct:^FF0000No, that's wrong^000000")){
+					case 1:
+						break;
+					case 2:
+						goto PB_PB;
+					
+				}
+				clear;
+				mes .name$;
+				mes "Please also confirm you're happy to pay a ^FF000025,000z^000000 fee for this service?";
+				switch(select("^32a852Yes please:^FF0000No, I've changed my mind^000000")){
+					case 1:
+						if(Zeny < .@rewardzeny+25000){
+							clear;
+							mes .name$;
+							mes  "Sorry, you don't have enough Zeny to cover the reward zeny and service fee.";
+							next;
+							goto PB_PBM;
+						}
+						break;
+					case 2:
+						goto PB_PB;
+				}
+				clear;
+				mes .name$;
+				emotion ET_DELIGHT;
+				query_sql("INSERT INTO `player_bounties` (`acc_id`,`name`,`item_id`,`item_amt`,`rew_zeny`,`rew_item_id`,`rew_item_amt`,`status`,`time_created`) VALUES (" + getcharid(3) + ",'" + strcharinfo(0) + "'," + .@itemrequired + "," + .@itemrequiredamt + "," + .@rewardzeny + "," + .@rewarditem + "," + .@rewarditemamt + ",1," + gettimetick(2) + ")");
+				//callfunc("F_DCMes","**"+strcharinfo(0)+"** has placed a new bounty!\n> **Bounty Item:** "+getitemname(.@itemrequired)+" x"+.@itemrequiredamt+"\n> **Reward:**"+getitemname(.@rewarditem)+" x"+.@rewarditemamt+" & "+callfunc("F_InsertComma",.@rewardzeny)+"z",2);
+				delitem .@rewarditem,.@rewarditemamt;
+				set Zeny,Zeny-(.@rewardzeny+25000);
+				mes "Thank you!";
+				mes "I've now placed your bounty up, I'll let you know once it's been completed!";
+				close2; cutin "",255; end;
+				
+			}
+			
+		//More Info
+		case 7:
+		
+		//Close
+		default:
+			close2; cutin "",255; end;
+	
+	}
+
+//============================================
+//	Viewing personal bounties
+//============================================
+PB_MB:
+	.@expire = 0;
+	.@completed = 0;
+	.@live = 0;
+	
+	deletearray .@id[0],127;
+	deletearray .@transid[0],127;
+	deletearray .@accid[0],127;
+	deletearray .@name$[0],127;
+	deletearray .@itemid[0],127;
+	deletearray .@itemamt[0],127;
+	deletearray .@rewzeny[0],127;
+	deletearray .@rewitemid[0],127;
+	deletearray .@rewitemamt[0],127;
+	deletearray .@status[0],127;
+	deletearray .@timecreated[0],127;
+	deletearray .@menulist$[0],127;
+	
+	query_sql("SELECT `id`,`acc_id`,`name`,`item_id`,`item_amt`,`rew_zeny`,`rew_item_id`,`rew_item_amt`,`status`,`time_created` FROM `player_bounties` WHERE acc_id="+getcharid(3)+" ORDER BY item_id DESC, item_amt ASC", .@transid,.@accid,.@name$,.@itemid,.@itemamt,.@rewzeny,.@rewitemid,.@rewitemamt,.@status,.@timecreated);
+	for(.@i = 0; .@i < getarraysize(.@transid); .@i++){
+		if(.@status[.@i] == 2){ .@expire = .@expire+1; }
+		if(.@status[.@i] == 3){	.@completed = .@completed+1; }
+		if(.@status[.@i] == 1){ .@live = .@live+1; }
+	}
+	if(!.@expire){.@expirestr$ = "0";} else {.@expirestr$ = "^3fa65f"+.@expire+"^000000";}
+	if(!.@completed){.@completedstr$ = "0";} else {.@completedstr$ = "^3fa65f"+.@completed+"^000000";}
+	if(!.@live){.@livestr$ = "0";} else {.@livestr$ = "^3fa65f"+.@live+"^000000";}
+		menu	" ~ Expired ["+.@expirestr$+"]",PB_MBE,
+				" ~ Completed ["+.@completedstr$+"]",PB_MBC,
+				" ~ Live ["+.@livestr$+"]",PB_MBL,
+				" ~ [^FF0000Cancel^000000]",-;
+					close2; cutin "",255; end;
+PB_MBE:
+	if(!.@expire){ 
+	clear;
+	mes .name$;
+	mes "You don't have any expired bounty listings.";
+	next;
+	goto PB_MB;
+	} 
+		clear;
+		mes .name$;
+		mes "What would you like to do?";
+			switch(select(" ~ Claim all expired bounties:[^FF0000Cancel^000000]")){
+				case 1:
+					for(.@i = 0; .@i < getarraysize(.@itemid); .@i++){
+						if(.@status[.@i] == 2){
+							getitem .@rewitemid[.@i],.@rewitemamt[.@i];
+							callfunc("F_DISPBOTTOM","Player Bounties","You received "+getitemname(.@rewitemid[.@i])+" x"+.@rewitemamt[.@i],"BLUE");
+							Zeny  = Zeny+.@rewzeny[.@i];
+							callfunc("F_DISPBOTTOM","Player Bounties","You received "+callfunc("F_InsertComma",.@rewzeny[.@i])+"z","BLUE");
+							query_sql("UPDATE `player_bounties` SET `status` = 4 WHERE id = " + .@transid[.@i] + "");
+						}
+					}
+					goto PB_MB;
+				case 2:
+					close2; cutin "",255; end;
+			}
+PB_MBC:
+	if(!.@completed){ 
+	clear;
+	mes .name$;
+	mes "You don't have any completed bounty listings.";
+	next;
+	goto PB_MB;
+	} 
+		clear;
+		mes .name$;
+		mes "What would you like to do?";
+			switch(select(" ~ Claim all completed bounties:[^FF0000Cancel^000000]")){
+				case 1:
+					for(.@i = 0; .@i < getarraysize(.@itemid); .@i++){
+						if(.@status[.@i] == 3){
+							getitem .@itemid[.@i],.@itemamt[.@i];
+							callfunc("F_DISPBOTTOM","Player Bounties","You received "+getitemname(.@itemid[.@i])+" x"+.@itemamt[.@i],"BLUE");
+							query_sql("UPDATE `player_bounties` SET `status` = 4 WHERE id = " + .@transid[.@i] + "");
+						}
+					}
+					goto PB_MB;
+				case 2:
+					close2; cutin "",255; end;
+			}
+PB_MBL:
+	clear;
+	mes .name$;
+	
+	deletearray .@id[0],127;
+	deletearray .@transid[0],127;
+	deletearray .@accid[0],127;
+	deletearray .@name$[0],127;
+	deletearray .@itemid[0],127;
+	deletearray .@itemamt[0],127;
+	deletearray .@rewzeny[0],127;
+	deletearray .@rewitemid[0],127;
+	deletearray .@rewitemamt[0],127;
+	deletearray .@status[0],127;
+	deletearray .@timecreated[0],127;
+	deletearray .@menulist$[0],127;
+	
+	query_sql("SELECT `id`,`acc_id`,`name`,`item_id`,`item_amt`,`rew_zeny`,`rew_item_id`,`rew_item_amt`,`status`,`time_created` FROM `player_bounties` WHERE status=1 AND acc_id="+getcharid(3)+" ORDER BY id DESC", .@mytransid,.@myaccid,.@myname$,.@myitemid,.@myitemamt,.@myrewzeny,.@myrewitemid,.@myrewitemamt,.@mystatus,.@mytimecreated);
+	
+	if(!getarraysize(.@mystatus)){ mes "You have no bounties live at the moment, why don't you place one?"; next; goto PB_MB; }
+	mes "Now listing your open bounties:";
+	mes " ";
+	for(.@i = 0; .@i < getarraysize(.@myitemid); .@i++){
+				setarray .@menulist$[.@i],"[^e8ae00"+getitemname(.@myitemid[.@i])+"^000000] x"+.@myitemamt[.@i];
+	}
+	
+	set .@c,callfunc("F_Pages",implode(.@menulist$,":"),10);
+	clear;
+	mes .name$;
+	mes "[^cf0404Seller^000000]: "+.@name$[.@c];
+	
+	if(!countitem(.@myitemid[.@c])) { mes "[^cf0404Item Needed^000000]: ^FF0000"+getitemname(.@myitemid[.@c])+"^000000 x^FF0000"+.@myitemamt[.@c]+"^000000"; } 
+		else {
+			if(countitem(.@myitemid[.@c]) < .@myitemamt[.@c]){ mes "[^cf0404Item Needed^000000]: ^00a81c"+getitemname(.@myitemid[.@c])+"^000000 x^FF0000"+.@myitemamt[.@c]+"^000000"; } 
+				else { mes "[^cf0404Item Needed^000000]: ^00a81c"+getitemname(.@myitemid[.@c])+"^000000 x^00a81c"+.@myitemamt[.@c]+"^000000"; }}
+	mes "----";
+	mes "[^e8ae00Reward Item^000000]: "+getitemname(.@myrewitemid[.@c])+" x"+.@myrewitemamt[.@c];
+	mes "[^e8ae00Zeny Reward^000000]: "+.@myrewzeny[.@c]+"z";
+		switch(select("[^777777Go Back^000000]:[^FF0000Cancel Quest^000000]:[^bd6060Cancel^000000]")){
+			case 1:
+				clear;
+				mes .name$;
+				mes "What would you like to view?";
+				goto PB_MB;
+			case 2:
+				getitem .@myrewitemid[.@c],.@myrewitemamt[.@c];
+				callfunc("F_DISPBOTTOM","Player Bounties","You received "+getitemname(.@myrewitemid[.@c])+" x"+.@myrewitemamt[.@c],"BLUE");
+				Zeny = Zeny+.@myrewzeny[.@c];
+				callfunc("F_DISPBOTTOM","Player Bounties","You received "+callfunc("F_InsertComma",.@myrewzeny[.@c])+"z","BLUE");
+				query_sql("UPDATE `player_bounties` SET `status`=4 WHERE id="+.@mytransid[.@c]+"");
+				clear;
+				mes .name$;
+				mes "I've cancelled this quest and refunded your deposited rewards!";
+				
+			case 3:
+				close2; cutin "",255; end;
+		}
+	close2; cutin "",255; end;
+
+//============================================
+//	Showing Label OnTouch
+//============================================
+OnMinute05:
+OnMinute15:
+OnMinute25:
+OnMinute35:
+OnMinute45:
+OnMinute55:
+	.@sevendaysago = gettimetick(2)-604800;
+	query_sql("SELECT `id`,`time_created`, `status` FROM `player_bounties`", .@id, .@timecreated,.@status);
+	for(.@i = 0; .@i < getarraysize(.@timecreated); .@i++){
+		if(.@timecreated[.@i] <= .@sevendaysago && .@status == 1){
+			query_sql("UPDATE `player_bounties` SET `status` = 2 WHERE id = " + .@id[.@i] + "");
+		}
+	}
+	end;
+
+
+OnTouch:
+	showscript "[ "+ strnpcinfo(1)+" ]",getnpcid(0);
+	end;
+
+}
+//=================================================================================//
+//	Creates a defined and uniform way to use 'dispbottom' script command
+//	-	getarg(0)	=	Displayed NPC Name
+//	-	getarg(1)	=	Message Body
+//	-	getarg(2)	=	Message Colour
+//=================================================================================//
+function	script	F_DISPBOTTOM	{
+if(getargcount() == 2){
+	.@colour = 3;
+} else {
+	setarray .@colourswitch$[0],"RED","1",
+								"BLUE","2",
+								"GREEN","3",
+								"ORANGE","4",
+								"BROWN","5",
+								"PINK","6",
+								"WHITE","7",
+								"YELLOW","8";
+	.@index = inarray(.@colourswitch$[0],getarg(2));
+	.@colour = atoi(.@colourswitch$[.@index+1]);
+}
+	switch(.@colour){
+	case 1:	//red
+		dispbottom "["+getarg(0)+"]: " + getarg(1),0xe65c5c; break;
+	case 2:	//blue
+		dispbottom "["+getarg(0)+"]: " + getarg(1),0x5cd4e6; break;
+	case 3:	//green
+		dispbottom "["+getarg(0)+"]: " + getarg(1),0x5be002; break;
+	case 4:	//orange
+		dispbottom "["+getarg(0)+"]: " + getarg(1),0xf0aa54; break;
+	case 5:	//brown
+		dispbottom "["+getarg(0)+"]: " + getarg(1),0x91714a; break;
+	case 6:	//pink
+		dispbottom "["+getarg(0)+"]: " + getarg(1),0xf0a5ec; break;
+	case 7:	//white
+		dispbottom "["+getarg(0)+"]: " + getarg(1),0xffffff; break;
+	case 8:	//yellow
+		dispbottom "["+getarg(0)+"]: " + getarg(1),0xffee8f; break;
+	default:
+		dispbottom "["+getarg(0)+"]: " + getarg(1),0x5be002; break;
+	}
+	return;
+}
