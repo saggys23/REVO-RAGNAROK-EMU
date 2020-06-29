@@ -310,8 +310,8 @@ switch(select("- Select Equipment:- Information:- Nevermind")) {
 
 		if(.@u_go) {
 			if( (.@type$ == "attr" && .slot[.@e+4] == 2) || (.@type$ == "stats" && .slot[.@e+7] == 2))
-				if(.@ref < (.@r+1)) {
-					mes "To upgrade your enchantment further you need to increase the refine on your equipment as well.";
+				if(.@ref < (.@r+5)) {
+					mes "To upgrade your enchantment minimum Equipment refine level is ^FF0000+6^000000.";
 					close;
 				}
 			set .@upg_c,rand(1,100);
@@ -376,85 +376,19 @@ switch(select("- Select Equipment:- Information:- Nevermind")) {
 
 	case 2:
 	mes .n$;
-	mes "Please select about what you want to know more:";
+	mes "Only ^FF0000Headger^000000 or ^FF0000Armor^000000 can enchanted 100% Succes.";
+	mes "Enchant Upgrade Minimum Refine is ^FF0000+6^000000 each item can upgrade twice With ^FF000050%^000000 Succes for first Upgrade and ^FF000030%^000000 for 2nd Upgrade.";
 	next;
-	switch(select("- Equipment:- Enchantment List:- Nevermind")) {
-	
-		case 1: // Equipment
-		mes .n$;
-		mes "Each Equipment Slot has different settings.";
-		mes "Please select an Equipment Slot for further options:";
-		next;		
-		set .@c,select(.eq_menu$);
-		set .@e,.@c*16-16;
-		
-		mes .n$;
-		mes "Do you want to see the equipment settings or if there are limitations?";
-		next;
-		switch(select("- Equipment Settings:- Equipment Limitations:- Nevermind")) {
-			
-			case 1:
-			mes "["+.EQ_Name$[.@c-1]+"]";
-			mes "Enchantable: "+( (.slot[.@e+1] == 0)?"Disabled":"Enabled");
-			mes "Attribute Enchants: "+( (.slot[.@e+2] == 0)?"Disabled":"Enabled");
-			mes "Attribute Enchant Option: "+( (.slot[.@e+3] == 0)?"Random":"Selectable");
-			mes "Attribute Enchant Upgrade: "+( (.slot[.@e+4] == 0)?"Disabled":( (.slot[.@e+4] == 1)?"Enabled":"Refine Based Upgrade"));
-			mes "Status Enchants: "+( (.slot[.@e+5] == 0)?"Disabled":"Enabled");
-			mes "Status Enchant Option: "+( (.slot[.@e+6] == 0)?"Random":"Selectable");
-			mes "Status Enchant Upgrade: "+( (.slot[.@e+7] == 0)?"Disabled":"Enabled");
-			mes "Special Enchants: "+( (.slot[.@e+8] == 0)?"Disabled":"Enabled");
-			mes "Special Enchant Option: "+( (.slot[.@e+9] == 0)?"Random":"Selectable");
-			mes "Price for Enchanting: "+ ( (.slot[.@e+10] == 0)?"None":( (.slot[.@e+10] == 1)?.slot[.@e+11]+"x Zeny":( (.slot[.@e+10] == 2)?.slot[.@e+11]+"x Cash Points":"Item:")));
+	mes .n$;
+	mes "Price for Enchanting & Upgrade: "+ ( (.slot[.@e+10] == 0)?"None":( (.slot[.@e+10] == 1)?.slot[.@e+11]+"x Zeny":( (.slot[.@e+10] == 2)?.slot[.@e+11]+"x Cash Points":"Item:")));
 			if(.slot[.@e+10] >= 501 && getitemname(.slot[.@e+10]) != "null") // To prevent an warning in getitemname with invalid ID
-				mes " > "+.slot[.@e+11]+"x "+getitemname(.slot[.@e+10]);
-			mes "Enchant Reset: "+( (.slot[.@e+12] == 0)?"Disabled":"Enabled");
-			mes "Price for Resetting: "+ ( (.slot[.@e+13] == 0)?"None":( (.slot[.@e+13] == 1)?.slot[.@e+14]+"x Zeny":( (.slot[.@e+13] == 2)?.slot[.@e+14]+"x Cash Points":"Item:")));
+			mes "> "+.slot[.@e+11]+"x "+getitemname(.slot[.@e+10]);
+			mes "Price for Resetting: "+ ( (.slot[.@e+13] == 0)?"one":( (.slot[.@e+13] == 1)?.slot[.@e+14]+"x Zeny":( (.slot[.@e+13] == 2)?.slot[.@e+14]+"x Cash Points":"Item:")));
 			if(.slot[.@e+13] >= 501 && getitemname(.slot[.@e+13]) != "null") // To prevent an warning in getitemname with invalid ID
-				mes " > "+.slot[.@e+14]+"x  "+getitemname(.slot[.@e+13]);
+			mes " > "+.slot[.@e+14]+"x  "+getitemname(.slot[.@e+13]);
 			mes "Enchant Reset Type: "+( (.slot[.@e+15] == 0)?"All at once":"Selectable");
-			break;
-		
-			case 2: // Equipment Limitation
-			mes "["+.EQ_Name$[.@c-1]+"]";
-			if(getarraysize(getd("."+.limit_v$[.@c-1])) > 0) {
-				for ( set .@a,0; .@a < getarraysize(getd("."+.limit_v$[.@c-1])); set .@a,.@a + 2) {
-					mes "^0000FF"+getitemname(getd("."+.limit_v$[.@c-1]+"["+.@a+"]"))+"["+getitemslots(getd("."+.limit_v$[.@c-1]+"["+.@a+"]"))+"]:^000000";
-					mes "^FF0000"+( (getd("."+.limit_v$[.@c-1]+"["+(.@a+1)+"]") == 0)?"Not-Enchantable":getd("."+.limit_v$[.@c-1]+"["+(.@a+1)+"]")+" Slots")+"^000000";
-				}
-			} else 
-				mes "None";
-			break;
-			
-			case 3: // Nevermind
-			break;
-		}
-		break;
-		
-		case 2: // Enchantment List
-		mes .n$;
-		mes "Each Enchantment type has their own chances of success for Upgrade and Random Enchantment.";
-		mes " ";
-		mes "[Enchantment List]";
-		mes " > Attribute Enchants:";
-		for ( set .@l,0; .@l < getarraysize(.attr_n$); set .@l,.@l + 1)
-			if(.attr_e[.@l]) mes " - "+.attr_n$[.@l];
-		mes " ";
-		mes " > Status Enchants:";
-		for ( set .@l,0; .@l < getarraysize(.stats_n$); set .@l,.@l + 1)
-			if(.stats_e[.@l]) mes " - "+.stats_n$[.@l];
-		mes " ";
-		mes " > Special Enchants:";
-		mes "^FF0000Note: Can't be Upgraded!^000000";
-		for ( set .@l,0; .@l < getarraysize(.special_n$); set .@l,.@l + 1)
-			if(.special_e[.@l]) mes " - "+.special_n$[.@l];
-		break;
-		
-		case 3: // Nevermind
-		break;
-	}
-	break;
 	
-	
+break;
 	case 3: // Nevermind
 	break;
 }
@@ -522,10 +456,10 @@ set .n$,"["+strnpcinfo(0)+"]";
 // [15] = Enchant Reset Type: 0 = All at once, 1 = Selectable
 setarray .slot[0],
 // Index: 	0				1	2 3 4	5 6 7 	8 9    10 	 11    12 	13	14	15
-	EQI_HEAD_TOP,			1,	1,0,2,	1,0,0,	0,0,	1,	100000,	1,	6417,	1,	0, // Top Headgear
+	EQI_HEAD_TOP,			1,	1,0,2,	1,0,0,	0,0,	1,	250000,	1,	6417,	1,	0, // Top Headgear
 	EQI_HEAD_MID,			0,	1,0,2,	1,0,2,	1,0,	1,	50000,	1,	0,	0,	0, // Middle Headgear
-	EQI_HEAD_LOW,			0,	1,0,2,	0,0,2,	1,0,	1,	100000,	1,	6417,	1,	0, // Lower Headgear
-	EQI_ARMOR,				1,	1,0,2,	1,0,0,	0,0,	1,	100000,	1,	6417,	1,	0,  // Armor
+	EQI_HEAD_LOW,			0,	1,0,2,	0,0,2,	1,0,	1,	250000,	1,	6417,	1,	0, // Lower Headgear
+	EQI_ARMOR,				1,	1,0,2,	1,0,0,	0,0,	1,	250000,	1,	6417,	1,	0,  // Armor
 	EQI_HAND_R,				0,	1,0,2,	1,0,2,	1,0,	1,	50000,	1,	0,	0,	0, // Weapon
 	EQI_HAND_L,				0,	1,0,2,	1,0,2,	1,0,	1,	50000,	1,	0,	0,	0, // Shield
 	EQI_GARMENT,			0,	1,0,2,	1,0,2,	1,0,	1,	50000,	1,	0,	0,	0, // Garment
