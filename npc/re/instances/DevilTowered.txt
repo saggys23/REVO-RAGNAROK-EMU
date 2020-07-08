@@ -1,4 +1,3 @@
-
 //===== rAthena Script =======================================
 //= Devil Tower
 //===== Description: =========================================
@@ -8,35 +7,32 @@
 //= 1.0 First version. [Capuche]
 //============================================================
 
-
-payo2,34,113,6	script	Devil Tower [Silho]	10191,{
+dali02,134,119,5	script	Historian Shep#tnm01	4_F_NOVICE,{
 	if (BaseLevel < 90) {
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "Are you volunteering to explore the Devil's Tower?";
 		mes "It's extremely dangerous so you need to be at least ^4d4dffLevel 90^000000.";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "Will you come back when you get stronger?";
 		mes "You know what I mean right?";
-		mes "^FFCC00Min Level Requirement : 90 ^000000";
 		close;
 	}
-
 	switch( checkquest(7577,PLAYTIME) ) {// daily timer
 	case -1:
 		break;
 	case 0:
 	case 1:
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "You want to explore again so soon?";
 		mes "Your body needs to recover from the time traveling.";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "Take a rest day and come back tomorrow.!";
 		mes "You understand?";
 		close;
-	case 2:				//remove quest, bisa masuk lagi
-		mes "[Silho]";
+	case 2:
+		mes "[Shep]";
 		mes "Have you rested long enough?";
 		mes "I am scheduled to explore today!";
 		mes "I have always been waiting for a member of the expedition!";
@@ -49,11 +45,11 @@ payo2,34,113,6	script	Devil Tower [Silho]	10191,{
 		close;
 	}
 	if (isbegin_quest(7576) > 0) {// instance completed
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "So time and space seem to have converged there?";
 		mes "I'm amazed that time travel is possible.";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "This is all you have.";
 		mes "You did a good job.";
 		mes "I look forward to more discoveries!";
@@ -62,18 +58,18 @@ payo2,34,113,6	script	Devil Tower [Silho]	10191,{
 		erasequest 7571;// Tower Expedition
 		erasequest 7574;// Thanatos Tower
 		erasequest 7576;// Morocc castle seal
-		getexp 100000,100000;
+		getexp 450000,450000;
 		devil_tower_can_reenter = 0;
 		devil_tower_enter = 0;
 		mes "Please come back tomorrow!";
 		close;
 	}
 	if (isbegin_quest(7574) > 0) {// failed after seal
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "Oh, you are back so soon...";
 		mes "Ok, I see what happened.";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "This is all you have.";
 		mes "You did a good job.";
 		mes "I look forward to more discoveries!";
@@ -88,11 +84,11 @@ payo2,34,113,6	script	Devil Tower [Silho]	10191,{
 		close;
 	}
 	if (isbegin_quest(7571) > 0) {// failed at stair 2 tnm1
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "Oh, you are back.";
 		mes "Let me see... you mean this tower has a passage to connect to the demon world.";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "This is all you have.";
 		mes "You did a good job.";
 		mes "I look forward to more discoveries!";
@@ -107,43 +103,43 @@ payo2,34,113,6	script	Devil Tower [Silho]	10191,{
 		mes "Please come back tomorrow!";
 		close;
 	}
-	switch( checkquest(7568,PLAYTIME) ) {// entrance timer - 1h30 to enter  //daftar instance
-	case -1:								
-		mes "[Silho]";
+	switch( checkquest(7568,PLAYTIME) ) {// entrance timer - 1h30 to enter
+	case -1:
+		mes "[Shep]";
 		mes "Are you volunteering to explore the Devil's Tower? I have been waiting for someone like you!";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "Finally, someone to share the mysteries of the tower for me.";
 		mes "No one has been volunteering up this point so I was getting worried.";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "Please report anything you find in the tower to me.";
 		mes "The better the info~ the better the zeny I'll pay you!";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "That Laphine scholar over there will open up the dimensional gap with this time device.";
 		mes "It is still unstable so your time for exploring will be limited.";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "If you are unexpectedly bounced back to here again, you should return quickly.";
 		mes "If you do you may or may not be able to re-enter depending on how fast you are.";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "But if you run out of time, the access to the tower will disappear.";
 		mes "So do you want to volunteer?";
 		next;
 		if (select( "Volunteer", "No Thanks" ) == 2) {
-			mes "[Silho]";
+			mes "[Shep]";
 			mes "Oh that's too bad";
 			mes "There is nothing I can do I guess.";
 			mes "I'll just find someone else...";
 			close;
 		}
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "Thank you.";
 		mes "Okay, gather your party and remember to report to me what you find.";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "^4d4dffExploring time limit is for your safety^000000!";
 		setquest 7568;// Explore the tower
 		close;
@@ -153,13 +149,13 @@ payo2,34,113,6	script	Devil Tower [Silho]	10191,{
 			break;
 		// fall through
 	case 2:
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "You seem to be late.";
 		mes "You took an extraordinarily long time.";
 		mes ".....";
 		mes "I can't use any of your info.";
 		next;
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "There is nothing we can do .";
 		mes "There's always opportunities for other expeditions.";
 		setquest 7577;// Space distortion
@@ -170,36 +166,36 @@ payo2,34,113,6	script	Devil Tower [Silho]	10191,{
 		devil_tower_enter = 0;
 		close;
 	}
-	mes "[Silho]";
+	mes "[Shep]";
 	mes "First of all, you need to reserve a queue at the gate.";
-	mes "The Laphine Scholar Silho will reserve your queue for you.";
+	mes "The Laphine Scholar Artie will reserve your queue for you.";
 	next;
-	mes "[Silho]";
+	mes "[Shep]";
 	mes "Time is limited because the dimensional gap is still unstable.";
 	mes "Make your exploration short and sweet.";
 	next;
-	mes "[Silho]";
+	mes "[Shep]";
 	mes "Rewards will be different depending on your time.";
 	mes "Good luck!";
 	next;
 	if (select( "Trust me!", "Cancel my reservation" ) == 1) {
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "I believe that you can manage under these restrictions.";
 		mes "I believe in you!";
 		close;
 	}
 	if (devil_tower_enter == 1) {
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "You seem to be tired of exploring.";
 		mes "^4d4dffIf you cancel now. You will be able to challenge one day after.^000000";
 		mes "Is that okay?";
 		next;
 		if (select( "Yes Cancel.", "Wait, don't cancel!" ) == 2) {
-			mes "[Silho]";
+			mes "[Shep]";
 			mes "Ok, I won't cancel.";
 			close;
 		}
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "Really.";
 		mes "then, come back tomorrow.";
 		setquest 7577;// Space distortion
@@ -210,16 +206,75 @@ payo2,34,113,6	script	Devil Tower [Silho]	10191,{
 		devil_tower_can_reenter = 0;
 		close;
 	}
-	mes "[Silho]";
+	mes "[Shep]";
 	mes "Really?";
 	mes "After listening to all this explanation?";
 	erasequest 7568;// Explore the tower
 	close;
 }
 
-payo2,34,109,6	script	Devil Tower Dimension#izl	PORTAL,{   //////////#### NPC PORTALL
+dali02,137,121,3	script	Magic Scholar Artie#tnm	4_M_FAIRYKID6,{
+	.@party_id = getcharid(1);
+	if (.@party_id == 0) {
+		mes "[Artie]";
+		mes "let's have fun since we just left bifrost.";
+		mes "No?";
+		mes "you are applying as a volunteer?";
+		mes "You'd better gather a party for this expedition.";
+		next;
+		mes "[Artie]";
+		mes "Don't take any unncessary risks, okay?";
+		close;
+	}
+	if (is_party_leader() == false) {
+		mes "[Artie]";
+		mes "Bring the Expedition Chief.";
+		mes "Devil's Tower is not a place to visit alone.";
+		mes "Bring the manager.";
+		close;
+	}
+	if (devil_tower_enter == 1) {
+		mes "[Artie]";
+		mes "You have already entered by connecting it.";
+		mes "Connect to the space again? I can not do that.";
+		close;
+	}
+	switch( checkquest(7568,PLAYTIME) ) {
+	case 0:
+	case 1:
+		break;
+	case -1:
+	case 2:
+		mes "[Artie]";
+		mes "Hrm... It is difficult to connect to unless it is an appointed exploration time.";
+		mes "Not to mention dangerous as well.";
+		close;
+	}
+	mes "[Artie]";
+	mes "Are you a volunteer to explore the Devil's Tower?";
+	mes "Do you want me to activate the Dimensional Device?";
+	next;
+	mes "[Artie]";
+	mes "Decide quickly because you only have a finite amount of time in there.";
+	next;
+	if (select( "Yes, activate the device.", "Wait for a minute." ) == 2) {
+		mes "[Artie]";
+		mes "Your time to explore is dwindling.";
+		mes "Time is very important.";
+		mes "What are you waiting for?";
+		close;
+	}
+	mes "[Artie]";
+	mes "The Dimensional Device is activated.";
+	mes "If you're lucky, you can get through this quickly.";
+	mes "I look forward to hearing good news.";
+	instance_create("Devil's Tower");
+	close;
+}
+
+dali02,141,120,3	script	Dimensional Device#tnm0	PORTAL,{
 	if (devil_tower_can_reenter == 1) {// can't re-enter
-		mes "[Silho]";
+		mes "[Artie]";
 		mes "Hey, Hey";
 		mes "It is difficult to send to you through the device right now.";
 		mes "We should stop exploring today and let's go again another day.";
@@ -231,87 +286,41 @@ payo2,34,109,6	script	Devil Tower Dimension#izl	PORTAL,{   //////////#### NPC PO
 		break;
 	case -1:
 	case 2:
-		mes "[Silho]";
+		mes "[Artie]";
 		mes "Look, I am sorry but it is not allowed to enter except during the allowed time, Devil's Tower is dangerous.";
 		close;
 	}
-	mes "[Silho]";
+	mes "[Artie]";
 	mes "Yes, this is the Dimensional Device.";
 	mes "It is used to travel time.";
 	mes "It will be difficult to enter again if you leave.";
 	next;
-	mes "[Silho]";
+	mes "[Artie]";
 	mes "Don't worry though, I'm a genius scholar~";
 	mes "Anyway, ready to enter?";
 	next;
-	
-
-	switch(select("Generate Portal:Enter the device:Stop")){  //genereteportal
-
-	case 1:
-	.@party_id = getcharid(1);
-	if (.@party_id == 0) {
-		mes "[Silho]";
-		mes "let's have fun since we just left bifrost.";
-		mes "No?";
-		mes "you are applying as a volunteer?";
-		mes "You'd better gather a party for this expedition.";
-		next;
-		mes "[Silho]";
-		mes "Don't take any unncessary risks, okay?";
+	if (select( "Enter the device.", "Stop." ) == 2) {
+		mes "[Artie]";
+		mes "Right.";
+		mes "It seems like quite a long time has passed since you activated the device. Am I right?";
 		close;
 	}
-	if (is_party_leader() == false) {
-		mes "[Silho]";
-		mes "Bring the Expedition Chief.";
-		mes "Devil's Tower is not a place to visit alone.";
-		mes "Bring the manager.";
-		close;
-	}
-	if (devil_tower_enter == 1) {
-		mes "[Silho]";
-		mes "You have already entered by connecting it.";
-		mes "Connect to the space again? I can not do that.";
-		close;
-	}
-	mes "[Silho]";
-	mes "Are you a volunteer to explore the Devil's Tower?";
-	mes "Do you want me to activate the Dimensional Device?";
-	next;
-	mes "[Silho]";
-	mes "Decide quickly because you only have a finite amount of time in there.";
-	next;
-	if (select( "Yes, activate the device.", "Wait for a minute." ) == 2) {
-		mes "[Silho]";
-		mes "Your time to explore is dwindling.";
-		mes "Time is very important.";
-		mes "What are you waiting for?";
-		close;
-	}
-	mes "[Silho]";
-	mes "The Dimensional Device is activated.";
-	mes "If you're lucky, you can get through this quickly.";
-	mes "I look forward to hearing good news.";
-	instance_create("Devil's Tower");
-	close;
-
-	case 2:
-		.@md_name$ = "Devil's Tower";
+	.@md_name$ = "Devil's Tower";
 	switch( instance_enter(.@md_name$) ) {
 	case IE_OTHER:
 		mes "An unknown error occurred.";
 		close;
 	case IE_NOINSTANCE:
-		mes "[Silho]";
+		mes "[Shep]";
 		mes "The Dimensional Device needs to be activated first before entering.";
 		mes "It doesn't seem to be activated yet.";
 		next;
-		mes "[Silho]";
-		mes "Please get a permission to activate it by talking to the Magic Scholar Silho.";
+		mes "[Shep]";
+		mes "Please get a permission to activate it by talking to the Magic Scholar Artie.";
 		close;
 	case IE_NOMEMBER:
-		mes "[Silho]";
-		mes "Exploring Devil's Tower will be permitted only for expeditions in pSilhos.";
+		mes "[Artie]";
+		mes "Exploring Devil's Tower will be permitted only for expeditions in parties.";
 		mes "Make sure you are ready.";
 		close;
 	case IE_OK:
@@ -320,13 +329,6 @@ payo2,34,109,6	script	Devil Tower Dimension#izl	PORTAL,{   //////////#### NPC PO
 		devil_tower_enter = 1;
 		end;
 	}
-		case 3:
-		mes "[Silho]";
-		mes "Right.";
-		mes "It seems like quite a long time has passed since you activated the device. Am I right?";
-		close;
-
-}
 }
 
 dali02,134,112,3	script	#tnmtks01	HIDDEN_WARP_NPC,3,3,{
@@ -336,55 +338,55 @@ OnTouch_:
 	initnpctimer;
 	end;
 OnTimer1000:
-	npctalk "Silho: Hey, you! How is your research going?", "Magic Scholar Silho#tnm";
+	npctalk "Artie: Hey, you! How is your research going?", "Magic Scholar Artie#tnm";
 	end;
 OnTimer3000:
-	npctalk "Silho: Who are you calling hey you? You're just a dusty little fairy!", "Historian Silho#tnm01";
+	npctalk "Shep: Who are you calling hey you? You're just a dusty little fairy!", "Historian Shep#tnm01";
 	end;
 OnTimer6000:
-	npctalk "Silho: A dusty little what? I'll have you know, I have superior genes to your species you ape!", "Magic Scholar Silho#tnm";
+	npctalk "Artie: A dusty little what? I'll have you know, I have superior genes to your species you ape!", "Magic Scholar Artie#tnm";
 	end;
 OnTimer9000:
-	npctalk "Silho: What do I care what you say? Even our kids are bigger than you tiny little fairies!", "Historian Silho#tnm01";
+	npctalk "Shep: What do I care what you say? Even our kids are bigger than you tiny little fairies!", "Historian Shep#tnm01";
 	end;
 OnTimer12000:
-	npctalk "Silho: Think you're so big just because you're a magic scholar huh?", "Historian Silho#tnm01";
+	npctalk "Shep: Think you're so big just because you're a magic scholar huh?", "Historian Shep#tnm01";
 	end;
 OnTimer14000:
-	npctalk "Silho: You know nothing human. Remind me again who found this tower entrance?", "Magic Scholar Silho#tnm";
+	npctalk "Artie: You know nothing human. Remind me again who found this tower entrance?", "Magic Scholar Artie#tnm";
 	end;
 OnTimer18000:
-	npctalk "Silho: *Sigh*... Y....You did.", "Historian Silho#tnm01";
+	npctalk "Shep: *Sigh*... Y....You did.", "Historian Shep#tnm01";
 	end;
 OnTimer21000:
-	npctalk "Silho: Y....You? Did I stutter? And who solved the formula calculating the dimensional gap connected to the tower?", "Magic Scholar Silho#tnm";
+	npctalk "Artie: Y....You? Did I stutter? And who solved the formula calculating the dimensional gap connected to the tower?", "Magic Scholar Artie#tnm";
 	end;
 OnTimer24000:
-	npctalk "Silho: Yes, yes it was you!", "Historian Silho#tnm01";
+	npctalk "Shep: Yes, yes it was you!", "Historian Shep#tnm01";
 	end;
 OnTimer27000:
-	npctalk "Silho: So I take it you're no longer questioning how smart I am right?", "Magic Scholar Silho#tnm";
+	npctalk "Artie: So I take it you're no longer questioning how smart I am right?", "Magic Scholar Artie#tnm";
 	end;
 OnTimer30000:
-	npctalk "Silho: Alright, alright. I need an adventurer to explore the tower for us.", "Historian Silho#tnm01";
+	npctalk "Shep: Alright, alright. I need an adventurer to explore the tower for us.", "Historian Shep#tnm01";
 	end;
 OnTimer33000:
-	npctalk "Silho: No one has volunteered because everyone says it's too dangerous!", "Historian Silho#tnm01";
+	npctalk "Shep: No one has volunteered because everyone says it's too dangerous!", "Historian Shep#tnm01";
 	end;
 OnTimer36000:
-	npctalk "Silho: No volunteers? Come on. Harness your motivational skills and find someone.", "Magic Scholar Silho#tnm";
+	npctalk "Artie: No volunteers? Come on. Harness your motivational skills and find someone.", "Magic Scholar Artie#tnm";
 	end;
 OnTimer37000:
-	emotion ET_KIK, getnpcid(0, "Magic Scholar Silho#tnm");
+	emotion ET_KIK, getnpcid(0, "Magic Scholar Artie#tnm");
 	end;
 OnTimer39000:
-	npctalk "Silho: Hello!!! Now recruiting new members to exploring the Devil's Tower!", "Historian Silho#tnm01";
+	npctalk "Shep: Hello!!! Now recruiting new members to exploring the Devil's Tower!", "Historian Shep#tnm01";
 	end;
 OnTimer42000:
-	npctalk "Silho: Please come! Now's your chance to possibly come face to face with the infamous minions of Satan Morocc himself!", "Historian Silho#tnm01";
+	npctalk "Shep: Please come! Now's your chance to possibly come face to face with the infamous minions of Satan Morocc himself!", "Historian Shep#tnm01";
 	end;
 OnTimer45000:
-	npctalk "Silho: You sure that's the right thing to say? Maybe your recruiting tactics need refining...", "Magic Scholar Silho#tnm";
+	npctalk "Artie: You sure that's the right thing to say? Maybe your recruiting tactics need refining...", "Magic Scholar Artie#tnm";
 	stopnpctimer;
 	enablenpc "#tnmtks01";
 	end;

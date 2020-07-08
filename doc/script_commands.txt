@@ -1197,6 +1197,7 @@ make it stop in some other manner.
 	mes "I will warp you now.";
 	close2;
 	warp "place",50,50;
+
 	end;
 
 Don't expect things to run smoothly if you don't make your scripts 'end'.

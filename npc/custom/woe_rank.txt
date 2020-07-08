@@ -23,7 +23,7 @@ PRIMARY KEY (`Char_ID`)
 ) ENGINE=MyISAM;
 */
 
-izlude,101,148,3	script	WoE Ranker	417,{
+payo2,85,141,6	script	WoE Ranker	417,{
 
 	set .@menu$, "Top "+.top+" Kills:Top "+.top+" Deaths:Top "+.top+" Breaker:Guild Rank:Points Shop:";
 	if (getgmlevel() == 99) { set .@menu$, .@menu$ + "Reset Data"; }

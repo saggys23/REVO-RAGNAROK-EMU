@@ -1,6 +1,6 @@
 // EnrichQuest
 //============================================================
-izlude,142,135,6	script	Enriched Ore Quest	726,{
+payo2,26,174,6	script	Enriched Ore Quest	726,{
 	callfunc "EnrichQuest","Enriched Ore Quest";
 	end;
 }

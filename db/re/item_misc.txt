@@ -873,13 +873,13 @@ IG_CardAlbum_Armor,4299,3	// Clock Card
 IG_CardAlbum_Armor,4300,1	// Chimera Card
 IG_CardAlbum_Armor,4301,1	// Killer Mantis Card
 IG_CardAlbum_Armor,4315,1	// Pest Card
-IG_CardAlbum_Armor,4332,3	// Waste Stove Card
-IG_CardAlbum_Armor,4333,3	// Venomous Card
-IG_CardAlbum_Armor,4337,2	// Porcellio Card
-IG_CardAlbum_Armor,4338,3	// Obsidian Card
-IG_CardAlbum_Armor,4339,3	// Mineral Card
-IG_CardAlbum_Armor,4346,1	// Egnigem Cenia Card
-IG_CardAlbum_Armor,4353,2	// Remover Card
+//IG_CardAlbum_Armor,4332,3	// Waste Stove Card
+//IG_CardAlbum_Armor,4333,3	// Venomous Card
+//IG_CardAlbum_Armor,4337,2	// Porcellio Card
+//IG_CardAlbum_Armor,4338,3	// Obsidian Card
+//IG_CardAlbum_Armor,4339,3	// Mineral Card
+//IG_CardAlbum_Armor,4346,1	// Egnigem Cenia Card
+//IG_CardAlbum_Armor,4353,2	// Remover Card
 // Headgear Card Album
 IG_CardAlbum_Helm,4010,3	// Willow Card
 IG_CardAlbum_Helm,4039,3	// Stainer Card
@@ -902,20 +902,20 @@ IG_CardAlbum_Helm,4223,3	// Stalactic Golem Card
 IG_CardAlbum_Helm,4229,3	// Tower Keeper Card
 //IG_CardAlbum_Helm,4241,3	// Arc Angeling Card
 IG_CardAlbum_Helm,4258,3	// Evil Nymph Card
-IG_CardAlbum_Helm,4260,3	// Wootan Shooter Card
-IG_CardAlbum_Helm,4261,3	// Wootan Fighter Card
+//IG_CardAlbum_Helm,4260,3	// Wootan Shooter Card
+//IG_CardAlbum_Helm,4261,3	// Wootan Fighter Card
 //IG_CardAlbum_Helm,4269,1	// Incubus Card
 //IG_CardAlbum_Helm,4271,2	// Giant Hornet Card
 IG_CardAlbum_Helm,4278,3	// Gibbet Card
 IG_CardAlbum_Helm,4288,3	// Carat Card
 IG_CardAlbum_Helm,4296,3	// Cramp Card
-IG_CardAlbum_Helm,4311,3	// Permeter Card
-IG_CardAlbum_Helm,4336,1	// Ungoliant Card
-IG_CardAlbum_Helm,4343,3	// Holden Card
-IG_CardAlbum_Helm,4354,1	// Gemini-S58 Card
-IG_CardAlbum_Helm,4358,1	// Seyren Windsor Card
-IG_CardAlbum_Helm,4364,1	// Margaretha Sorin Card
-IG_CardAlbum_Helm,4366,1	// Kathryne Keyron Card
+//IG_CardAlbum_Helm,4311,3	// Permeter Card
+//IG_CardAlbum_Helm,4336,1	// Ungoliant Card
+//IG_CardAlbum_Helm,4343,3	// Holden Card
+//IG_CardAlbum_Helm,4354,1	// Gemini-S58 Card
+//IG_CardAlbum_Helm,4358,1	// Seyren Windsor Card
+//IG_CardAlbum_Helm,4364,1	// Margaretha Sorin Card
+//IG_CardAlbum_Helm,4366,1	// Kathryne Keyron Card
 // Accessory Card Album
 IG_CardAlbum_Acc,4022,2	// Spore Card
 IG_CardAlbum_Acc,4027,3	// Kukre Card
@@ -970,10 +970,10 @@ IG_CardAlbum_Acc,4321,3	// Hylozoist Card
 IG_CardAlbum_Acc,4326,3	// Sea-Otter Card
 IG_CardAlbum_Acc,4327,3	// Bloody Butterfly Card
 IG_CardAlbum_Acc,4331,3	// Heater Card
-IG_CardAlbum_Acc,4344,3	// Anopheles Card
-IG_CardAlbum_Acc,4347,1	// Armeyer Dinze Card
-IG_CardAlbum_Acc,4348,1	// Wickebine Tres Card
-IG_CardAlbum_Acc,4349,1	// Errende Ebecee Card
+//IG_CardAlbum_Acc,4344,3	// Anopheles Card
+//IG_CardAlbum_Acc,4347,1	// Armeyer Dinze Card
+//IG_CardAlbum_Acc,4348,1	// Wickebine Tres Card
+//IG_CardAlbum_Acc,4349,1	// Errende Ebecee Card
 // Shoes Card Album
 IG_CardAlbum_Shoes,4009,3	// Chonchon Card
 IG_CardAlbum_Shoes,4038,3	// Zombie Card
@@ -1030,19 +1030,19 @@ IG_CardAlbum_Shield,4304,1	// Tamruan Card
 IG_CardAlbum_Shield,4309,1	// Parasite Card
 IG_CardAlbum_Shield,4314,1	// Penomena Card
 IG_CardAlbum_Shield,4322,1	// High Orc Card
-IG_CardAlbum_Shield,4340,1	// Teddy Bear Card
-IG_CardAlbum_Shield,4397,1	// Despero of Thanatos Card
-IG_CardAlbum_Shield,4413,1	// Hodremlin Card
-IG_CardAlbum_Shield,4414,1	// Seeker Card
-IG_CardAlbum_Shield,4420,1	// Muscipular Card
-IG_CardAlbum_Shield,4439,1	// Flame Skull Card
-IG_CardAlbum_Shield,4442,1	// Tatacho Card
-IG_CardAlbum_Shield,4443,1	// Aqua Elemental Card
-IG_CardAlbum_Shield,4444,1	// Draco Card
-IG_CardAlbum_Shield,4445,1	// Luciola Vespa Card
-IG_CardAlbum_Shield,4447,1	// Centipede Card
-IG_CardAlbum_Shield,4448,1	// Cornus Card
-IG_CardAlbum_Shield,4449,1	// Dark Shadow Card
+//IG_CardAlbum_Shield,4340,1	// Teddy Bear Card
+//IG_CardAlbum_Shield,4397,1	// Despero of Thanatos Card
+//IG_CardAlbum_Shield,4413,1	// Hodremlin Card
+//IG_CardAlbum_Shield,4414,1	// Seeker Card
+//IG_CardAlbum_Shield,4420,1	// Muscipular Card
+//IG_CardAlbum_Shield,4439,1	// Flame Skull Card
+//IG_CardAlbum_Shield,4442,1	// Tatacho Card
+//IG_CardAlbum_Shield,4443,1	// Aqua Elemental Card
+//IG_CardAlbum_Shield,4444,1	// Draco Card
+//IG_CardAlbum_Shield,4445,1	// Luciola Vespa Card
+//IG_CardAlbum_Shield,4447,1	// Centipede Card
+//IG_CardAlbum_Shield,4448,1	// Cornus Card
+//IG_CardAlbum_Shield,4449,1	// Dark Shadow Card
 // Weapon Card Album
 IG_CardAlbum_Weapon,4002,5	// Fabre Card
 IG_CardAlbum_Weapon,4004,5	// Drops Card
@@ -1123,16 +1123,16 @@ IG_CardAlbum_Weapon,4307,5	// Beetle King Card
 IG_CardAlbum_Weapon,4308,5	// Tri Joint Card
 IG_CardAlbum_Weapon,4310,5	// Panzer Goblin Card
 IG_CardAlbum_Weapon,4312,5	// Seal Card
-IG_CardAlbum_Weapon,4316,5	// False Angel Card
-IG_CardAlbum_Weapon,4317,1	// Mobster Card
-IG_CardAlbum_Weapon,4320,5	// Bloody Knight Card
-IG_CardAlbum_Weapon,4329,5	// Phendark Card
-IG_CardAlbum_Weapon,4335,5	// Pitman Card
-IG_CardAlbum_Weapon,4341,5	// Metaling Card
-IG_CardAlbum_Weapon,4350,2	// Laurell Weinder Card
-IG_CardAlbum_Weapon,4360,2	// Eremes Guile Card
-IG_CardAlbum_Weapon,4362,2	// Howard Alt-Eisen Card
-IG_CardAlbum_Weapon,4368,2	// Cecil Damon Card
+//IG_CardAlbum_Weapon,4316,5	// False Angel Card
+//IG_CardAlbum_Weapon,4317,1	// Mobster Card
+//IG_CardAlbum_Weapon,4320,5	// Bloody Knight Card
+//IG_CardAlbum_Weapon,4329,5	// Phendark Card
+//IG_CardAlbum_Weapon,4335,5	// Pitman Card
+//IG_CardAlbum_Weapon,4341,5	// Metaling Card
+//IG_CardAlbum_Weapon,4350,2	// Laurell Weinder Card
+//IG_CardAlbum_Weapon,4360,2	// Eremes Guile Card
+//IG_CardAlbum_Weapon,4362,2	// Howard Alt-Eisen Card
+//IG_CardAlbum_Weapon,4368,2	// Cecil Damon Card
 // Garment Card Album
 IG_CardAlbum_Garment,4015,32	// Condor Card
 IG_CardAlbum_Garment,4056,32	// Dustiness Card
@@ -1150,20 +1150,20 @@ IG_CardAlbum_Garment,4133,32	// Raydric Card
 IG_CardAlbum_Garment,4159,32	// Nine Tail Card
 IG_CardAlbum_Garment,4178,32	// Dragon Tail Card
 IG_CardAlbum_Garment,4179,32	// Dragon Fly Card
-IG_CardAlbum_Garment,4183,1	// Vagabond Wolf Card
-IG_CardAlbum_Garment,4197,1	// Mastering Card
-IG_CardAlbum_Garment,4210,1	// Wanderer Card
-IG_CardAlbum_Garment,4211,1	// Vocal Card
+IG_CardAlbum_Garment,4183,16	// Vagabond Wolf Card
+IG_CardAlbum_Garment,4197,16	// Mastering Card
+IG_CardAlbum_Garment,4210,16	// Wanderer Card
+IG_CardAlbum_Garment,4211,16	// Vocal Card
 IG_CardAlbum_Garment,4266,32	// Eclipse Card
 IG_CardAlbum_Garment,4285,32	// Choco Card
 IG_CardAlbum_Garment,4287,32	// Kapha Card
-IG_CardAlbum_Garment,4303,1	// Giant Whisper Card
-IG_CardAlbum_Garment,4306,1	// Toad Card
+IG_CardAlbum_Garment,4303,12	// Giant Whisper Card
+IG_CardAlbum_Garment,4306,16	// Toad Card
 IG_CardAlbum_Garment,4313,32	// Punk Card
 IG_CardAlbum_Garment,4325,32	// Harpy Card
 IG_CardAlbum_Garment,4328,32	// Yao Jun Card
-IG_CardAlbum_Garment,4334,25	// Noxious Card
-IG_CardAlbum_Garment,4351,1	// Kavach Icarus Card
+//IG_CardAlbum_Garment,4334,25	// Noxious Card
+//IG_CardAlbum_Garment,4351,16	// Kavach Icarus Card
 IG_CardAlbum_Garment,4375,25	// Orc Baby Card
 // Flamel Card
 IG_Flamel_Card,545,1		// Condensed Red Potion

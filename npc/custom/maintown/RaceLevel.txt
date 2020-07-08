@@ -26,7 +26,7 @@
 // a SQL item_db.
 //=====================================================
 ///////////////////////////////////////////////////////
-izlude,118,139,6	script	Claim Level 99	10255,{
+payo2,107,117,3	script	Claim Level 99	10255,{
 	if (checkweight(1201,1) == 0) {
 		mes "- Sepertinya inventory anda penuh!! -";
 		close;
@@ -42,14 +42,14 @@ izlude,118,139,6	script	Claim Level 99	10255,{
 
 	// Base and job levels required
 	set .@maxbase, 99;
-	set .@maxjob, 70;
+	set .@maxjob, 50;
 
 	// The default/initial percentage for rare items.
   set .@rare_chance, 30;
 
   // Rewards. Remember, you can change these in-game too!
-  setarray .@default_rare_rewards[0], 510, 511, 512, 513, 514;
-  setarray .@default_common_rewards[0], 510, 511, 512, 513, 514;
+  setarray .@default_rare_rewards[0], 20407;
+  setarray .@default_common_rewards[0], 20132;
 
 	if ($r99_rare_chance == 0)
 		$r99_rare_chance = .@rare_chance;
@@ -59,7 +59,7 @@ izlude,118,139,6	script	Claim Level 99	10255,{
 	if (getarraysize($common_rewards) == 0)
 		copyarray $common_rewards[0], .@default_common_rewards[0], getarraysize(.@default_common_rewards);
 
-	setarray .@rewardablejobs[0], Job_Lord_Knight, Job_High_Priest, Job_High_Wizard, Job_Whitesmith, Job_Sniper, Job_Assassin_Cross, Job_Paladin , Job_Champion , Job_Professor, Job_Stalker, Job_Creator, Job_Clown, Job_Gypsy;
+	setarray .@rewardablejobs[0], Job_Knight, Job_Priest, Job_Wizard, Job_Blacksmith, Job_Hunter, Job_Assassin, Job_Crusader , Job_Monk , Job_Sage, Job_Rogue, Job_Alchemist, Job_Bard, Job_Dancer;
 
 	function SelectFromArray;
 	function ListRewards;
@@ -279,18 +279,12 @@ izlude,118,139,6	script	Claim Level 99	10255,{
     if ($r99_rare_chance > 0) {
       mes "There is ^0099cc" + $r99_rare_chance + "%^000000 of chance that you'll get a rare item!";
       mes "Possible rare items:";
-			set .@length, getarraysize($rare_rewards);
-      for (.@i = 0; .@i < .@length; .@i++) {
-        set .@item, $rare_rewards[.@i];
-        mes " - " + getitemname(.@item);
-      }
-    }
+		set .@length, getarraysize($rare_rewards);
+		mes "^0099ccCostume Vicious Mind Aura Crimson (Red)^000000";
+		}
 		mes "Possible common items:";
 		set .@length, getarraysize($common_rewards);
-		for (.@i = 0; .@i < .@length; .@i++) {
-			set .@item, $common_rewards[.@i];
-			mes " - " + getitemname(.@item);
-		}
+		mes "^0099ccCostume Vicious Mind Aura Crimson (White)^000000";
 		next;
 		goto Begin;
 

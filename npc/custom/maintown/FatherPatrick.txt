@@ -1,4 +1,4 @@
 // Father Patrick
 //============================================================
-izlude,99,123,6	script	Father Patrick	412,{
+izlude,99,124,6	script	Father Patrick	412,{
 }

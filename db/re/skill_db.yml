@@ -8920,7 +8920,7 @@ Body:
     Hit: Single
     HitCount: 1
     SplashArea: -1
-    AfterCastActDelay: 4000
+    AfterCastActDelay: 3000
     Duration2: 5000
     Requires:
       SpCost:
@@ -13359,9 +13359,10 @@ Body:
     Element: Weapon
     CastCancel: true
     Cooldown: 1000
-    AfterCastActDelay: 1000
+    AfterCastActDelay: 1500
     CastTime: 1000
-    IgnoreDex: true
+    CastTimeFlags:
+      IgnoreDex: true
     Requires:
       SpCost: 30
       ItemCost:

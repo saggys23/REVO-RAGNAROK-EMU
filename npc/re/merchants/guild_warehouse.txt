@@ -113,3 +113,4 @@ umbala,106,160,3	duplicate(GuildWarehouse)	Guild Warehouse Manager#umbala	896
 veins,205,130,3	duplicate(GuildWarehouse)	Guild Warehouse Manager#veins	896
 xmas,155,140,5	duplicate(GuildWarehouse)	Guild Warehouse Manager#xmas	896
 yuno,176,187,3	duplicate(GuildWarehouse)	Guild Warehouse Manager#yuno	896
+payo2,96,124,3	duplicate(GuildWarehouse)	Guild Warehouse Manager#payo2	896

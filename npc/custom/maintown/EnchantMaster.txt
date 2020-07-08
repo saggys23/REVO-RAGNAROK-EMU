@@ -25,7 +25,7 @@
 //= The idea about the shop display is inspired by sader's enchanter.
 //= There is also a version with Random Options Support available > mystic_enchanter.txt
 //============================================================
-izlude,143,121,6	script	Enchant Master	881,{
+payo2,113,98,3	script	Enchant Master	881,{
 function ME_Price;
 
 disable_items;
@@ -100,7 +100,7 @@ switch(select("- Select Equipment:- Information:- Nevermind")) {
 		case 0: mes "None"; break;
 		case 1: mes .slot[.@e+11]+" Zeny"; break;
 		case 2: mes .slot[.@e+11]+" Cash Points"; break;
-		default: mes .slot[.@e+11]+"x "+getitemname(.slot[.@e+10]); break;
+		default: mes "200.000z &" ;mes .slot[.@e+11]+"x "+getitemname(.slot[.@e+10]); break;
 	}
 	if(.slot[.@e+12]) {
 		mes "Price for Reseting:";
@@ -268,7 +268,9 @@ switch(select("- Select Equipment:- Information:- Nevermind")) {
 		
 		ME_Price .slot[.@e+10],.slot[.@e+11],2;
 		mes "The Enchantment was successfull.";
+		specialeffect 244;
 		break;
+		
 		
 		// Upgrade Enchantments
 		case 2:
@@ -284,13 +286,13 @@ switch(select("- Select Equipment:- Information:- Nevermind")) {
 		// Price Check
 		ME_Price .slot[.@e+10],.slot[.@e+11],1;
 		mes "Please choose which Enchant Slot you want to Upgrade:";
-		mes "^FF0000Note: Special Enchants can't be upgraded.^000000";
+		mes "^FF0000Note: Slot 3 can't be upgraded, maybe for next update.^000000";
 		next;
-		set .@s,5 - (select( ((.@c4 && compare(getitemname(.@c4),"Card") != 1)?"Enchant Slot 1":"")+":"+ ( (.@c3 && compare(getitemname(.@c3),"Card") != 1)?"Enchant Slot 2":"")));
+		set .@s,5 - (select( ((.@c4 && compare(getitemname(.@c4),"Card") != 1)?"Enchant Slot 4":"")+":"+ ( (.@c3 && compare(getitemname(.@c3),"Card") != 1)?"Enchant Slot 3":"")));
 		
 		mes .n$;
 		mes "Please select what kind of enchantment is in there:";
-		mes "^FF0000Note: STR,... are Attribute, ATK,... are Status and anything else is Special.^000000";
+		mes "^FF0000Note: STR/AGI/VIT/INT/DEX/LUK^000000";
 		next;
 		switch(select( ((.slot[.@e+4])?"- Attribute":"")+":"+ ((.slot[.@e+7])?"- Status":""))) {
 			case 1: set .@type$,"attr"; set .@t,select(.attr_m$) - 1; break;
@@ -310,8 +312,9 @@ switch(select("- Select Equipment:- Information:- Nevermind")) {
 
 		if(.@u_go) {
 			if( (.@type$ == "attr" && .slot[.@e+4] == 2) || (.@type$ == "stats" && .slot[.@e+7] == 2))
-				if(.@ref < (.@r+5)) {
-					mes "To upgrade your enchantment minimum Equipment refine level is ^FF0000+6^000000.";
+				if(.@ref < (.@r+1)) {
+					mes "To upgrade your enchantment further you need to increase the refine on your equipment as well.";
+					mes "^FF0000NOTE^000000: Enchant Upgrade Minimum Refine is ^FF0000+6^000000";
 					close;
 				}
 			set .@upg_c,rand(1,100);
@@ -323,9 +326,16 @@ switch(select("- Select Equipment:- Information:- Nevermind")) {
 					case 3: getitem2 .@id,1,1,.@ref,0,.@c1,.@c2,.@upg_id,.@c4; break;
 				}
 				ME_Price .slot[.@e+10],.slot[.@e+11],2;
+				specialeffect 104;
 				mes "The Upgrade was successfully.";
+								specialeffect 104;
+		break;
+				
 			} else 
+				ME_Price .slot[.@e+10],.slot[.@e+11],2;
+				specialeffect 611;
 				mes "The Upgrade has failed.";
+				
 				
 		} else if(.@u_fail) 
 			mes "I'm sorry, but there is no upgrade available anymore for this Enchantment.";
@@ -383,6 +393,7 @@ switch(select("- Select Equipment:- Information:- Nevermind")) {
 	mes "Price for Enchanting & Upgrade: "+ ( (.slot[.@e+10] == 0)?"None":( (.slot[.@e+10] == 1)?.slot[.@e+11]+"x Zeny":( (.slot[.@e+10] == 2)?.slot[.@e+11]+"x Cash Points":"Item:")));
 			if(.slot[.@e+10] >= 501 && getitemname(.slot[.@e+10]) != "null") // To prevent an warning in getitemname with invalid ID
 			mes "> "+.slot[.@e+11]+"x "+getitemname(.slot[.@e+10]);
+			> and 200.000z
 			mes "Price for Resetting: "+ ( (.slot[.@e+13] == 0)?"one":( (.slot[.@e+13] == 1)?.slot[.@e+14]+"x Zeny":( (.slot[.@e+13] == 2)?.slot[.@e+14]+"x Cash Points":"Item:")));
 			if(.slot[.@e+13] >= 501 && getitemname(.slot[.@e+13]) != "null") // To prevent an warning in getitemname with invalid ID
 			mes " > "+.slot[.@e+14]+"x  "+getitemname(.slot[.@e+13]);
@@ -416,8 +427,8 @@ end;
 			break;
 
 			default:
-			if(countitem(getarg(0)) < getarg(1)) {
-				mes "You don't have enough "+getitemname(getarg(0))+" for the Random Option Enchantment! You need "+getarg(1)+" "+getitemname(getarg(0))+".";
+			if(countitem(getarg(0)) < getarg(1) || Zeny < 200000) {
+				mes "You don't have enough Zeny 200.000 or "+getitemname(getarg(0))+" for the Random Option Enchantment! You need "+getarg(1)+" "+getitemname(getarg(0))+".";
 				close;
 			}
 			break;
@@ -428,7 +439,7 @@ end;
 			case 0: break;
 			case 1: set Zeny,Zeny - getarg(1); break;
 			case 2: set #CASHPOINTS,#CASHPOINTS - getarg(1); break;
-			default: delitem getarg(0),getarg(1); break;
+			default: zeny -= 200000;delitem getarg(0),getarg(1); break;
 		}
 	}
 	return;
@@ -456,10 +467,10 @@ set .n$,"["+strnpcinfo(0)+"]";
 // [15] = Enchant Reset Type: 0 = All at once, 1 = Selectable
 setarray .slot[0],
 // Index: 	0				1	2 3 4	5 6 7 	8 9    10 	 11    12 	13	14	15
-	EQI_HEAD_TOP,			1,	1,0,2,	1,0,0,	0,0,	1,	250000,	1,	6417,	1,	0, // Top Headgear
+	EQI_HEAD_TOP,			1,	1,0,2,	1,0,0,	0,0,	6423,	1,	1,	6417,	1,	0, // Top Headgear
 	EQI_HEAD_MID,			0,	1,0,2,	1,0,2,	1,0,	1,	50000,	1,	0,	0,	0, // Middle Headgear
 	EQI_HEAD_LOW,			0,	1,0,2,	0,0,2,	1,0,	1,	250000,	1,	6417,	1,	0, // Lower Headgear
-	EQI_ARMOR,				1,	1,0,2,	1,0,0,	0,0,	1,	250000,	1,	6417,	1,	0,  // Armor
+	EQI_ARMOR,				1,	1,0,2,	1,0,0,	0,0,	6423,	1,	1,	6417,	1,	0,  // Armor
 	EQI_HAND_R,				0,	1,0,2,	1,0,2,	1,0,	1,	50000,	1,	0,	0,	0, // Weapon
 	EQI_HAND_L,				0,	1,0,2,	1,0,2,	1,0,	1,	50000,	1,	0,	0,	0, // Shield
 	EQI_GARMENT,			0,	1,0,2,	1,0,2,	1,0,	1,	50000,	1,	0,	0,	0, // Garment
@@ -571,7 +582,7 @@ setarray .attr_p[0],100,50,20;
 // > Regeneration: 4930,4931,4932
 // > SP Consume: 4945,4946,4947
 setarray .stats_atk[0],4882,4766,4938,4937,4936;
-setarray .stats_matk[0],4883,4896,4834;
+setarray .stats_matk[0],4883,4896,4934;
 setarray .stats_flee[0],4946,4850,4850;
 setarray .stats_crit[0],4896,4811,4863;
 setarray .stats_def[0],4791,4792,4869;
@@ -605,7 +616,7 @@ setarray .spec_spell[0],4815;
 setarray .spec_sharp[0],4818;
 setarray .spec_expert[0],4832;
 setarray .spec_resist[0],4934;
-setarray .spec_cran[0],4834;
+setarray .spec_cran[0],4934;
 setarray .spec_spec[0],4850;
 setarray .spec_fatal[0],4863;
 setarray .spec_atkd[0],4869;

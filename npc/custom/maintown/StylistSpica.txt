@@ -21,7 +21,7 @@
 //= [Akira] 
 //= Email: kvictor@protonmail.com
 //============================================================
-izlude,116,158,3	script	Stylist Spica	10115,{
+payo2,71,118,6	script	Stylist Spica	10115,{
 	doevent "super_stylist_main::OnTalk";
 }
 
@@ -34,6 +34,7 @@ izlude,116,158,3	script	Stylist Spica	10115,{
 	mes "^FF0000[ Stylist Spica - Introduction ]^000000";
 	mes "Hi "+strcharinfo(0)+", I'm Spica stylist.";
 	mes "I can change your character appearance ";
+
 	switch (select(
 		"Open Dress Room",
 		"Cancel"
@@ -45,29 +46,43 @@ izlude,116,158,3	script	Stylist Spica	10115,{
 			Lmain:
 				mes "^FF0000[ Stylist Spica - Dress Room ]^000000";
 				mes "Ok, use the dress room to pick a style";
+				mes " Hairstyle / Hairdye for ^FF0000100k Zeny^000000";
+				mes " Cloth Colouring need ^FF0000Clothing Dye Coupon^000000 and";
+				mes " for Special Hairstyle need ^FF0000Hairstyle Coupon^000000";
 				switch (select(
 					"Change Hairstyle",
 					"Change Hairdye",
 					"Change Cloth Color",
-					"Change Cash Hairstyle"
+					"Change Special Hairstyle"
 				)) {
 					case 1:
 						set .@hairstylemin,getBattleFlag("min_hair_style");
 						set .@hairstylemaxn,23;
-						set .@hairstyleminn,0;
-
+						set .@hairstyleminn,1;
+						
 						next;
 						mes "^FF0000[ Stylist Spica - Hairstyle ]^000000";
 						mes "Insert a hairstyle number";
-							mes "Hairstyles: 0 to 23";
+							mes "Hairstyles: 1 to 23";
+							mes "^FF0000Put 0 to Cancel^000000";
 						input .@hairstyle;
-							if (.@hairstyle < .@hairstyleminn || .@hairstyle > .@hairstylemaxn) {
+							if (.@hairstyle > .@hairstylemaxn) {
 						mes "^FF0000Use Cash Hairstyle for style number 24-34^000000";
 							close;
-							}
+							} 
+							if (.@hairstyle == 0 ) {
+							cutin "",255;
+							end;}
+							if ( Zeny < 100001 ) {
+							cutin "",255;
+							mes "you need 100K zeny for my service";
+							end;}
+							zeny -= 100000;
 						setlook LOOK_HAIR,.@hairstyle;
 						next;
 						break;
+						
+
 					case 2:
 						next;
 						set .@hairdyemin,getBattleFlag("min_hair_color");
@@ -75,10 +90,14 @@ izlude,116,158,3	script	Stylist Spica	10115,{
 						mes "^FF0000[ Stylist Spica - Hairdye ]^000000";
 						mes "Insert a hairdye number";
 						mes "Hairdyes: " +.@hairdyemin+ " to " +.@hairdyemax;
+						mes "^FF0000Put 9 or More Cancel^000000";
 						input .@hairdye;
-						if (.@hairdye < .@hairdyemin || .@hairdye > .@hairdyemax) { 
+						if (.@hairdye < .@hairdyemin || .@hairdye > .@hairdyemax || Zeny < 100001) { 
 						set .@hairdye,0; 
+							cutin "",255;
+							end;
 						}
+						zeny -= 100000;
 						setlook LOOK_HAIR_COLOR,.@hairdye;
 						next;
 						break;
@@ -93,6 +112,12 @@ izlude,116,158,3	script	Stylist Spica	10115,{
 						if (.@clothcolor < .@clothcolormin || .@clothcolor > .@clothcolormax) { 
 						set .@clothcolor,0; 
 						}
+						if (countitem(6046) < 1 ) {
+						mes " U need a Coupon ";
+						cutin "",255;
+						end;
+						}
+						delitem 6046,1;  //Cloth Coupon
 						setlook LOOK_CLOTHES_COLOR,.@clothcolor;
 						next;
 						break;
@@ -108,6 +133,12 @@ izlude,116,158,3	script	Stylist Spica	10115,{
 						mes "^FF0000Cash style number is 24-34^000000";
 							close;
 							}
+						if (countitem(7622) < 1 ) {
+						mes " U need a Coupon ";
+						cutin "",255;
+						end;
+						}
+						delitem 7622,1;  //Hairstyle Coupon
 						setlook LOOK_HAIR,.@hairstyle;
 						next;
 						break;

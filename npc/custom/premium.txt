@@ -1,4 +1,4 @@
-izlude,125,148,6	script	Premium Service	528,{
+izlude,124,115,6	script	Premium Service	528,{
 if (getgroupid()<4) {
 goto Prem;
 }
@@ -16,10 +16,10 @@ switch(select("Heal & Buffs:Buy items:No, thanks.")) {
 
 	case 1:
 		mes "Choose which one do you wants.";
-		mes "First Buff ^FF0000STR +8, AGI +6, DEX +4, ATK +32^000000";
-		mes "Second Buffs ^FF0000INT +8, DEX +6, VIT +4, MATK +40^000000";
-		mes "Third Buffs ^FF0000Dex +8, AGI +6, LUK +4, ATK +24, MATK +24^000000";
-		mes "Fourth Buffs ^FF0000All stat +6, ATK +24, MATK +24^000000";
+		mes "First Buff ^FF0000STR +8, AGI +6, DEX +4, ATK +16^000000";
+		mes "Second Buffs ^FF0000INT +8, DEX +6, VIT +4, MATK +20^000000";
+		mes "Third Buffs ^FF0000Dex +8, AGI +6, LUK +4, ATK +12, MATK +15^000000";
+		mes "Fourth Buffs ^FF0000All stat +6, ATK +12, MATK +15^000000";
 		goto buff;
 
 		buff:
@@ -29,7 +29,7 @@ First:
 sc_start SC_STRFOOD,3600000,8;
 sc_start SC_AGIFOOD,3600000,6;
 sc_start SC_DEXFOOD,3600000,4;
-sc_start SC_ATKPOTION,600000,32;
+sc_start SC_ATKPOTION,600000,16;
 percentheal 100,100;
 close;
 
@@ -37,7 +37,7 @@ Second:
 sc_start SC_INTFOOD,3600000,8;
 sc_start SC_DEXFOOD,3600000,6;
 sc_start SC_VITFOOD,3600000,4;
-sc_start SC_MATKPOTION,600000,40;
+sc_start SC_MATKPOTION,600000,20;
 percentheal 100,100;
 close;
 
@@ -45,8 +45,8 @@ Third:
 sc_start SC_DEXFOOD,3600000,8;
 sc_start SC_AGIFOOD,3600000,6;
 sc_start SC_LUKFOOD,3600000,4;
-sc_start SC_ATKPOTION,600000,24;
-sc_start SC_MATKPOTION,600000,24;
+sc_start SC_ATKPOTION,600000,12;
+sc_start SC_MATKPOTION,600000,15;
 percentheal 100,100;
 close;
 
@@ -57,8 +57,8 @@ sc_start SC_VITFOOD,3600000,6;
 sc_start SC_INTFOOD,3600000,6;
 sc_start SC_DEXFOOD,3600000,6;
 sc_start SC_LUKFOOD,3600000,6;
-sc_start SC_ATKPOTION,600000,24;
-sc_start SC_MATKPOTION,600000,24;
+sc_start SC_ATKPOTION,600000,12;
+sc_start SC_MATKPOTION,600000,15;
 percentheal 100,100;
 close;
 
@@ -68,55 +68,45 @@ close;
 		goto item_list;
 
 		item_list:
-		menu "Universal Catalog Gold 20000 Zeny",Catalog,"Unlimited Flywing Box 20000",unli,"HP Pil 10000 Zeny",HP_PILL,"SP Pil 10000 Zeny",SP_PILL,"Authoritative Badge 10000 Zeny",Authoritative;
+		menu "Unlimited Flywing 2H Box 75000",unli,"HP Pil 10pcs 50000 Zeny",HP_PILL,"SP Pil 10pcs 50000 Zeny",SP_PILL,"Authoritative Badge 10pcs 30000 Zeny",Authoritative;
 
-Catalog:
-		set .@amount, countitem(12580);
-		if (zeny < 20000) mes "Sorry,Your zeny not enough,";
-		else if (.@amount >= 1) mes "You still have the item.";
-		else{
-		getitem 12581,10;
-		set zeny,zeny-20000;
-		}
-		close;
-		
 		unli:
-		set .@amount, countitem(17229);
-		if (zeny < 20000) mes "Sorry,Your zeny not enough,";
+		set .@amount, countitem(3012);
+		if (zeny < 75000) mes "Sorry,Your zeny not enough,";
 		else if (.@amount >= 1) mes "You still have the item.";
 		else{
-		getitem 17229,1;
-		set zeny,zeny-20000;
+		getitembound 3012,1,Bound_Account;
+		set zeny,zeny-75000;
 		}
 		close;
 
 		HP_PILL:
 		set .@amount, countitem(12274);
-		if (zeny < 10000) mes "Sorry,Your zeny not enough,";
+		if (zeny < 50000) mes "Sorry,Your zeny not enough,";
 		else if (.@amount >= 1) mes "You still have the item.";
 		else{
-		getitem 12274,10;
-		set zeny,zeny-10000;
+		getitembound 12274,10,Bound_Account;
+		set zeny,zeny-50000;
 		
 		close;
 
 		SP_PILL:
 		set .@amount, countitem(12275);
-		if (zeny < 10000) mes "Sorry,Your zeny not enough,";
+		if (zeny < 50000) mes "Sorry,Your zeny not enough,";
 		else if (.@amount >= 1) mes "You still have the item.";
 		else{
-		getitem 12275,10;
-		set zeny,zeny-10000;
+		getitembound 12275,10,Bound_Account;
+		set zeny,zeny-50000;
 		}
 		close;
 
 		Authoritative:
 		set .@amount, countitem(662);
-		if (zeny < 10000) mes "Sorry,Your zeny not enough,";
+		if (zeny < 30000) mes "Sorry,Your zeny not enough,";
 		else if (.@amount >= 1) mes "You still have the item.";
 		else{
-		getitem 662,10;
-		set zeny,zeny-10000;
+		getitembound 662,10,Bound_Account;
+		set zeny,zeny-30000;
 		}
 		close;
 	}
@@ -139,8 +129,10 @@ mes "[ Premium Service ]";
 mes "Maaf kamu tidak terdaftar sebagai premium member";
 mes " ";
 mes "Apa kamu ingin bergabung?";
+mes "Premium Service benefit : 100% Bonus EXP, 25% Bonus Drop, and access heal & buff.";
 next;
 mes "[ Premium Service ]";
+mes "Kamu bisa daftar disini atau membeli Ticket di cash shop.";
 mes "Berikut Biaya Member Premium Service.";
 mes "1 Week service "+.@week+" cash point";
 mes "1 Month service "+.@month+" cash point";
@@ -191,6 +183,7 @@ close;
 // --------------------------------------------------
 //	Duplicates:
 // --------------------------------------------------
+payo2,96,120,4	duplicate(Premium Service)	Premium Service#alb11	528
 alberta,33,240,4	duplicate(Premium Service)	Premium Service#alb	528
 aldebaran,146,116,4	duplicate(Premium Service)	Premium Service#alde	528
 amatsu,205,87,4	duplicate(Premium Service)	Premium Service#ama	528
@@ -217,7 +210,7 @@ umbala,97,148,3	duplicate(Premium Service)	Premium Service#umb	528
 veins,211,120,4	duplicate(Premium Service)	Premium Service#ve	528
 xmas,142,139,6	duplicate(Premium Service)	Premium Service#xmas	528
 yuno,164,50,4	duplicate(Premium Service)	Premium Service#yuno	528
-
+pvp_y_room,88,83,4	duplicate(Premium Service)	Premium Service#pvp	528
 // --------------------------------------------------
 //	Duplicates (Renewal):
 // --------------------------------------------------

@@ -550,10 +550,7 @@ lhz_in02,282,20,7	script	Fulerr	869,{
 	callfunc "refinemain","Fulerr",0;
 	end;
 }
-izlude,161,125,3	script	Fulerr#a	869,{
-	callfunc "refinemain","Fulerr1",0;
-	end;
-}
+
 izlude_d,161,125,3	script	Fulerr#b	869,{
 	callfunc "refinemain","Fulerr",0;
 	end;
@@ -570,6 +567,7 @@ izlude_a,161,125,3	script	Fulerr#e	869,{
 	callfunc "refinemain","Fulerr",0;
 	end;
 }
+
 //============================================================
 //= Main Refiner Function
 //============================================================
@@ -892,10 +890,7 @@ lhz_in02,278,24,3	script	Krugg	86,{
 	callfunc "phramain","Krugg";
 	end;
 }
-izlude,160,130,3	script	Krugg#a	86,{
-	callfunc "phramain","Krugg";
-	end;
-}
+
 izlude_a,160,130,3	script	Krugg#b	86,{
 	callfunc "phramain","Krugg";
 	end;
@@ -997,10 +992,7 @@ function	script	phramain	{
 
 // Ori/Elu Refiners
 //============================================================
-izlude,159,121,12	script	Zanna	83,{
-	callfunc "orimain","Zanna";
-	end;
-}
+
 izlude_a,159,121,12	script	Zanna#a	83,{
 	callfunc "orimain","Zanna";
 	end;
@@ -1122,7 +1114,8 @@ alberta_in,31,65,4	script	Repairman#alb	86,{
 	callfunc "repairmain","Repairman";
 	end;
 }
-izlude,122,150,6	script	Repairman#izl	84,{
+
+payo2,83,110,6	script	Repairman#izl2	84,{
 	callfunc "repairmain","Repairman";
 	end;
 }
