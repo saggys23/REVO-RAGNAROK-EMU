@@ -19,7 +19,7 @@ alberta,246,74,3	duplicate(Sea_Captain_amatsu)	Sea Captain#ama1	709
 
 // cities/ayothaya.txt
 //============================================================
-alberta,246,29,3	duplicate(Aibakthing_ayothaya)	Aibakthing#ayo	843
+//alberta,246,29,3	duplicate(Aibakthing_ayothaya)	Aibakthing#ayo	843
 
 // cities/gonryun.txt
 //============================================================
@@ -27,11 +27,11 @@ alberta,246,62,3	duplicate(Kunlun_Envoy_gonryun)	Kunlun Envoy#gon	776
 
 // cities/louyang.txt
 //============================================================
-alberta,246,40,3	duplicate(Girl_louyang)	Girl#0lou	815
+//alberta,246,40,3	duplicate(Girl_louyang)	Girl#0lou	815
 
 // cities/moscovia.txt
 //============================================================
-alberta,246,51,4	duplicate(PR_Officer_moscovia)	Moscovia P.R. Officer#1	960
+//alberta,246,51,4	duplicate(PR_Officer_moscovia)	Moscovia P.R. Officer#1	960
 
 // quests/quests_alberta.txt
 //============================================================

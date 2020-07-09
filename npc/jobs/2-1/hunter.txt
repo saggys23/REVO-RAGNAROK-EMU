@@ -484,7 +484,7 @@ in_hunter,60,105,4	script	Guild Receptionist#hnt	732,{
 				mes "[Demon Hunter]";
 				mes "Leave if you plan to trifle me your petty tricks. Do you not realize that you are toying with ^660000The Demon Hunter^000000?!'";
 				close2;
-				warp "hugel",208,223;
+				warp "payo2",160,183;
 				end;
 			}
 		}
@@ -641,7 +641,7 @@ in_hunter,60,105,4	script	Guild Receptionist#hnt	732,{
 	}
 }
 
-payon_in03,131,7,3	script	Hunter#htnGM	59,{
+payon_in02,23,31,3	script	HunterTest#htnGM	59,{
 	if (HNTR_Q == 10) {
 		mes "[Hunter Guildmaster]";
 		mes "Hmpf. You must be here for the Hunter job test. Let me tell you about the testing process. What would you like to know?";
@@ -774,7 +774,7 @@ payon_in03,131,7,3	script	Hunter#htnGM	59,{
 		mes "Wow, you came back in one piece!";
 		mes "I mean, good job. I'll give you the item which proves that you have passed the test.";
 		HNTR_Q = 17;
-		savepoint "payon",104,99,1,1;
+		savepoint "payo2",89,120,1,1;
 		getitem 1007,1; // Penetration
 		changequest 4012,4013;
 		next;
@@ -953,7 +953,7 @@ payon_in02,21,31,1	script	Hunter#htnGM2	59,{
 		mes "Wow. You're back in one piece!";
 		mes "I mean, good job. Well then, I'll give you the item which serves as proof that you passed the test.";
 		HNTR_Q = 17;
-		savepoint "payon",104,99,1,1;
+		savepoint "payo2",90,120,1,1;
 		getitem 1007,1; //Penetration
 		changequest 4012,4013;
 		next;
@@ -1023,14 +1023,14 @@ OnTouch_:
 		// donpcevent "Waiting Room#hnt::OnStart";
 		close2;
 		HNTR_Q = 13;
-		savepoint "payon",104,99,1,1;
+		savepoint "payo2",90,120,1,1;
 		warp "payon_in02",21,27;
 	}
 	else if (HNTR_Q > 15) {
 		mes "[Guide]";
 		mes "You shouldn't be here. How about finding the required job change item first?";
 		close2;
-		savepoint "payon",104,99,1,1;
+		savepoint "payo2",90,120,1,1;
 		warp "payon_in02",21,27;
 	}
 	end;
@@ -1270,11 +1270,11 @@ OnTouch_:
 	donpcevent "Waiting Room#hnt::OnStart";
 	HNTR_Q = 16;
 	changequest 4011,4012;
-	savepoint "payon",104,99,1,1;
+	savepoint "payo2",90,120,1,1;
 	if (rand(2))
 		warp "payon_in02",21,27;
 	else
-		warp "payon_in03",128,7;
+		warp "payon_in02",21,27;
 	end;
 }
 

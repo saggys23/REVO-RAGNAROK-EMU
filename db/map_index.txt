@@ -198,6 +198,10 @@ pay_fild11
 payon
 payon_in01
 payon_in02
+// Old Payon
+payo2
+pa2_in01
+pa2_in02
 priest_1-1
 priest_2-1
 priest_3-1

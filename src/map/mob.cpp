@@ -1039,6 +1039,9 @@ TIMER_FUNC(mob_delayspawn){
 		}
 		md->spawn_timer = INVALID_TIMER;
 		mob_spawn(md);
+		if( md->state.boss ) {
+		map_setmapflag(bl->m, MF_PVP, true);
+	}
 	}
 	return 0;
 }
@@ -1120,7 +1123,7 @@ int mob_spawn (struct mob_data *md)
 		md->bl.m = md->spawn->m;
 		md->bl.x = md->spawn->x;
 		md->bl.y = md->spawn->y;
-
+		if(md->spawn->state.boss)  map_setmapflag(md->bl.m, MF_PVP, true);
 		if( (md->bl.x == 0 && md->bl.y == 0) || md->spawn->xs || md->spawn->ys )
 		{	//Monster can be spawned on an area.
 			if( !map_search_freecell(&md->bl, -1, &md->bl.x, &md->bl.y, md->spawn->xs, md->spawn->ys, battle_config.no_spawn_on_player?4:0) )
@@ -3057,7 +3060,9 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 	// MvP tomb [GreenBox]
 	if (battle_config.mvp_tomb_enabled && md->spawn->state.boss && map_getmapflag(md->bl.m, MF_NOTOMB) != 1)
 		mvptomb_create(md, mvp_sd ? mvp_sd->status.name : NULL, time(NULL));
-
+	if(md->spawn->state.boss)  {
+		map_setmapflag(md->bl.m, MF_PVP, false);
+	}
 	if( !rebirth )
 		mob_setdelayspawn(md); //Set respawning.
 	return 3; //Remove from map.

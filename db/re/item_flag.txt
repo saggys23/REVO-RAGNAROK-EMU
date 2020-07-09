@@ -23,6 +23,8 @@
 12024,1 //Red_Pouch_Of_Surprise
 
 // Item group container
+35001,2 //HappinessEGG
+35000,2 //Headger Box
 603,2 //Old_Blue_Box
 616,2 //Old_Card_Album
 617,2 //Old_Violet_Box
